@@ -1,0 +1,37 @@
+# Environment Variables
+.env
+.env.local
+.env.development
+.env.production
+frontend/.env
+backend/.env
+
+# Node Modules
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Build Output
+frontend/build/
+frontend/dist/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Uploads (Product Images)
+backend/uploads/
+
+# PostgreSQ
+*.sql
+*.dump
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Editor Settings
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json

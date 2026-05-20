@@ -1,379 +1,714 @@
-// ============================================================
-//  src/pages/LandingPage.jsx  (Talha Tariq – 077019)
-//  ConMat Landing Page
-//  Theme: dark navy left panel + white right | accent #B45309
-// ============================================================
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-// ── Inline styles (no external CSS file needed) ──────────────
 const S = {
   page: {
     minHeight: '100vh',
-    display: 'flex',
-    fontFamily: "'Segoe UI', Arial, sans-serif"
+    background: '#ffffff',
+    color: '#0f172a',
+    fontFamily: "'Segoe UI', Arial, sans-serif",
+    overflowX: 'hidden'
   },
-
-  // ── LEFT PANEL ──────────────────────────────────────────────
-  left: {
-    width: '42%',
-    background: 'linear-gradient(160deg, #0f172a 0%, #1e293b 60%, #1a2744 100%)',
+  container: {
+    maxWidth: '1320px',
+    margin: '0 auto',
+    padding: '24px 32px',
     display: 'flex',
     flexDirection: 'column',
+    gap: '60px'
+  },
+  nav: {
+    display: 'flex',
     justifyContent: 'space-between',
-    padding: '48px 40px',
-    position: 'relative',
-    overflow: 'hidden'
+    alignItems: 'center',
+    gap: '24px'
   },
-  leftBgCircle1: {
-    position: 'absolute', top: '-80px', left: '-80px',
-    width: '300px', height: '300px', borderRadius: '50%',
-    background: 'rgba(180,83,9,0.08)', pointerEvents: 'none'
+  brand: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px'
   },
-  leftBgCircle2: {
-    position: 'absolute', bottom: '-60px', right: '-60px',
-    width: '250px', height: '250px', borderRadius: '50%',
-    background: 'rgba(180,83,9,0.06)', pointerEvents: 'none'
+  iconButton: {
+    background: 'transparent',
+    border: 'none',
+    fontSize: '18px',
+    padding: '8px',
+    cursor: 'pointer',
+    color: '#475569'
   },
-  logo: {
-    display: 'flex', alignItems: 'center', gap: '12px', zIndex: 1
+  brandMark: {
+    width: '42px',
+    height: '42px',
+    borderRadius: '12px',
+    background: 'linear-gradient(135deg,#f97316,#b45309)',
+    boxShadow: '0 16px 45px rgba(249,115,22,.2)',
+    display: 'grid',
+    placeItems: 'center',
+    color: '#fff',
+    fontWeight: 900,
+    fontSize: '18px'
   },
-  logoIcon: {
-    width: '44px', height: '44px',
-    background: 'linear-gradient(135deg,#b45309,#f97316)',
-    borderRadius: '10px',
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-    fontSize: '22px', fontWeight: 900, color: '#fff'
+  brandText: {
+    fontSize: '20px',
+    fontWeight: 800,
+    letterSpacing: '-0.6px',
+    color: '#111827'
   },
-  logoText: {
-    fontSize: '26px', fontWeight: 800,
-    color: '#fff', letterSpacing: '-0.5px'
+  navLinks: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '28px'
   },
-  logoSub: {
-    fontSize: '11px', color: '#94a3b8',
-    letterSpacing: '1.5px', textTransform: 'uppercase', marginTop: '2px'
+  navLink: {
+    color: '#475569',
+    fontSize: '14px',
+    fontWeight: 500,
+    background: 'transparent',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'color 0.2s'
   },
-  heroSection: {
-    zIndex: 1
+  navLinkActive: {
+    color: '#f97316'
   },
-  heroTag: {
-    display: 'inline-block',
-    background: 'rgba(180,83,9,0.18)',
-    color: '#fb923c',
-    fontSize: '11px', fontWeight: 700,
-    letterSpacing: '1.5px', textTransform: 'uppercase',
-    padding: '5px 14px', borderRadius: '20px',
-    border: '1px solid rgba(180,83,9,0.3)',
-    marginBottom: '20px'
+  buttonPressed: {
+    transform: 'translateY(2px)',
+    opacity: 0.95,
+    boxShadow: 'none'
+  },
+  navButton: {
+    borderRadius: '18px',
+    border: 'none',
+    padding: '10px 24px',
+    fontSize: '13px',
+    color: '#fff',
+    background: '#f97316',
+    cursor: 'pointer',
+    transition: 'background 0.2s, transform 0.2s'
+  },
+  hero: {
+    display: 'grid',
+    gridTemplateColumns: '1.1fr 0.9fr',
+    gap: '32px',
+    alignItems: 'center'
+  },
+  heroIntro: {
+    maxWidth: '660px'
+  },
+  heroBadge: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '10px',
+    color: '#b45309',
+    background: 'rgba(254, 215, 170, 0.35)',
+    padding: '12px 18px',
+    borderRadius: '999px',
+    fontSize: '12px',
+    fontWeight: 700,
+    letterSpacing: '1px',
+    marginBottom: '24px'
   },
   heroTitle: {
-    fontSize: '38px', fontWeight: 800,
-    color: '#fff', lineHeight: 1.15,
-    marginBottom: '16px'
+    fontSize: '56px',
+    lineHeight: 1.03,
+    fontWeight: 800,
+    marginBottom: '24px',
+    color: '#111827'
   },
   heroAccent: {
     color: '#f97316'
   },
-  heroDesc: {
-    fontSize: '15px', color: '#94a3b8',
-    lineHeight: 1.7, marginBottom: '32px'
+  heroText: {
+    fontSize: '17px',
+    lineHeight: 1.9,
+    color: '#475569',
+    marginBottom: '32px'
   },
-  statsRow: {
-    display: 'flex', gap: '28px', flexWrap: 'wrap'
+  heroCtas: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '12px'
   },
-  statItem: {
-    display: 'flex', flexDirection: 'column'
+  primaryButton: {
+    background: '#c2410c',
+    color: '#fff',
+    border: 'none',
+    padding: '12px 24px',
+    borderRadius: '12px',
+    fontSize: '14px',
+    fontWeight: 700,
+    cursor: 'pointer',
+    boxShadow: '0 12px 28px rgba(194,65,12,0.20)'
   },
-  statNum: {
-    fontSize: '24px', fontWeight: 800, color: '#f97316'
+  secondaryButton: {
+    background: '#1d4ed8',
+    color: '#fff',
+    border: '1px solid rgba(29,78,216,0.24)',
+    padding: '12px 24px',
+    borderRadius: '12px',
+    fontSize: '14px',
+    fontWeight: 700,
+    cursor: 'pointer'
   },
-  statLabel: {
-    fontSize: '11px', color: '#64748b',
-    textTransform: 'uppercase', letterSpacing: '1px', marginTop: '2px'
-  },
-  leftFooter: {
-    zIndex: 1
-  },
-  roleChips: {
-    display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px'
-  },
-  chip: {
-    fontSize: '11px', fontWeight: 600,
-    color: '#94a3b8', border: '1px solid #334155',
-    borderRadius: '20px', padding: '4px 12px',
-    background: 'rgba(255,255,255,0.03)'
-  },
-  leftNote: {
-    fontSize: '12px', color: '#475569'
-  },
-
-  // ── RIGHT PANEL ─────────────────────────────────────────────
-  right: {
-    flex: 1,
+  heroVisual: {
+    position: 'relative',
+    minHeight: '540px',
+    borderRadius: '38px',
+    overflow: 'hidden',
     background: '#f8fafc',
+    padding: '32px',
+    boxShadow: '0 30px 80px rgba(15,23,42,0.12)'
+  },
+  heroVisualImage: {
+    position: 'absolute',
+    inset: 0,
+    backgroundImage: 'url(https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    opacity: 0.18,
+    filter: 'grayscale(70%)'
+  },
+  heroOverlay: {
+    position: 'absolute',
+    inset: 0,
+    background: 'linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.95))'
+  },
+  heroStatsCard: {
+    position: 'relative',
+    zIndex: 1,
+    width: '100%',
+    minHeight: '420px',
+    borderRadius: '30px',
+    background: '#111827',
+    border: '1px solid rgba(255,255,255,0.08)',
+    padding: '34px',
     display: 'flex',
     flexDirection: 'column',
-    overflowY: 'auto'
+    justifyContent: 'space-between'
   },
-  rightTop: {
-    display: 'flex', justifyContent: 'flex-end', alignItems: 'center',
-    padding: '24px 40px 0'
+  heroStatTag: {
+    fontSize: '13px',
+    letterSpacing: '1.4px',
+    textTransform: 'uppercase',
+    color: '#94a3b8',
+    marginBottom: '26px'
   },
-  rightTopLink: {
-    fontSize: '14px', color: '#64748b', marginRight: '20px',
-    textDecoration: 'none', cursor: 'pointer'
+  heroStatTitle: {
+    fontSize: '32px',
+    fontWeight: 800,
+    color: '#fff',
+    marginBottom: '18px'
   },
-  rightContent: {
-    flex: 1, display: 'flex', flexDirection: 'column',
-    justifyContent: 'center', padding: '40px'
-  },
-  sectionLabel: {
-    fontSize: '11px', fontWeight: 700,
-    color: '#b45309', letterSpacing: '2px',
-    textTransform: 'uppercase', marginBottom: '8px'
-  },
-  sectionTitle: {
-    fontSize: '30px', fontWeight: 800,
-    color: '#0f172a', marginBottom: '8px', lineHeight: 1.2
-  },
-  sectionDesc: {
-    fontSize: '14px', color: '#64748b',
-    marginBottom: '32px', lineHeight: 1.6
-  },
-
-  // ── Feature cards ────────────────────────────────────────────
-  cardsGrid: {
+  heroMiniStats: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gap: '16px',
-    marginBottom: '36px'
+    gap: '14px'
   },
-  card: {
-    background: '#fff',
+  heroMiniItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '18px 20px',
+    borderRadius: '20px',
+    background: 'rgba(255,255,255,0.04)'
+  },
+  heroMiniKey: {
+    color: '#cbd5e1',
+    fontSize: '13px'
+  },
+  heroMiniValue: {
+    fontWeight: 700,
+    color: '#fff'
+  },
+  featuresSection: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, minmax(0,1fr))',
+    gap: '20px'
+  },
+  featureCard: {
+    borderRadius: '24px',
+    background: '#111827',
+    border: '1px solid rgba(255,255,255,0.06)',
+    padding: '26px',
+    minHeight: '160px',
+    transition: 'transform 0.25s, box-shadow 0.25s',
+    cursor: 'pointer'
+  },
+  featureIcon: {
+    width: '46px',
+    height: '46px',
+    borderRadius: '16px',
+    display: 'grid',
+    placeItems: 'center',
+    background: 'rgba(249,115,22,0.16)',
+    color: '#f97316',
+    fontSize: '20px',
+    marginBottom: '18px'
+  },
+  featureTitle: {
+    fontSize: '18px',
+    fontWeight: 700,
+    color: '#fff',
+    marginBottom: '10px'
+  },
+  featureDesc: {
+    fontSize: '14px',
+    color: '#cbd5e1',
+    lineHeight: 1.75
+  },
+  forecastSection: {
+    display: 'grid',
+    gap: '24px',
+    background: '#020203',
+    padding: '32px',
+    borderRadius: '28px'
+  },
+  forecastHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    gap: '16px'
+  },
+  forecastTag: {
+    color: '#f97316',
+    fontSize: '12px',
+    textTransform: 'uppercase',
+    letterSpacing: '1.6px',
+    fontWeight: 700
+  },
+  forecastTitle: {
+    fontSize: '32px',
+    fontWeight: 800,
+    color: '#fff'
+  },
+  forecastDesc: {
+    color: '#94a3b8',
+    maxWidth: '660px',
+    lineHeight: 1.8,
+    marginTop: '8px'
+  },
+  forecastGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, minmax(0,1fr))',
+    gap: '18px'
+  },
+  forecastCard: {
+    borderRadius: '28px',
+    padding: '26px',
+    background: '#111827',
+    border: '1px solid rgba(255,255,255,0.06)'
+  },
+  forecastTagSmall: {
+    fontSize: '12px',
+    color: '#94a3b8',
+    textTransform: 'uppercase',
+    letterSpacing: '1px',
+    marginBottom: '14px'
+  },
+  forecastValue: {
+    fontSize: '36px',
+    fontWeight: 800,
+    color: '#fff',
+    marginBottom: '10px'
+  },
+  forecastNote: {
+    fontSize: '13px',
+    color: '#cbd5e1',
+    lineHeight: 1.75
+  },
+  materialsSection: {
+    display: 'grid',
+    gap: '22px'
+  },
+  materialsHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: '16px'
+  },
+  materialsTitle: {
+    fontSize: '28px',
+    fontWeight: 800,
+    color: '#020203'
+  },
+  materialsLink: {
+    fontSize: '13px',
+    fontWeight: 700,
+    color: '#f97316',
+    background: 'rgba(249,115,22,0.08)',
+    borderRadius: '18px',
+    padding: '10px 18px',
+    border: '1px solid rgba(249,115,22,0.18)',
+    cursor: 'pointer'
+  },
+  productGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, minmax(0,1fr))',
+    gap: '20px'
+  },
+  productCard: {
+    borderRadius: '30px',
+    overflow: 'hidden',
+    background: '#111827',
+    boxShadow: '0 24px 60px rgba(0,0,0,0.20)',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  productImage: {
+    minHeight: '260px',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  },
+  productInfo: {
+    padding: '24px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '12px'
+  },
+  productName: {
+    fontSize: '17px',
+    fontWeight: 700,
+    color: '#fff'
+  },
+  productMeta: {
+    fontSize: '13px',
+    color: '#94a3b8'
+  },
+  productPrice: {
+    fontSize: '15px',
+    fontWeight: 700,
+    color: '#f97316'
+  },
+  ctaBanner: {
+    borderRadius: '32px',
+    background: '#020203',
+    border: '1px solid rgba(255,255,255,0.08)',
+    padding: '40px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '24px',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+    minHeight: '220px'
+  },
+  ctaBannerText: {
+    color: '#fff'
+  },
+  ctaBannerTitle: {
+    fontSize: '30px',
+    fontWeight: 800,
+    marginBottom: '14px'
+  },
+  ctaBannerDesc: {
+    color: '#cbd5e1',
+    lineHeight: 1.8
+  },
+  ctaBannerButtons: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '20px',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  ctaPrimaryButton: {
+    background: '#c2410c',
+    color: '#fff',
+    border: 'none',
+    padding: '14px 30px',
     borderRadius: '14px',
-    padding: '20px',
-    border: '1px solid #e2e8f0',
-    cursor: 'default',
-    transition: 'box-shadow 0.2s, transform 0.2s'
+    fontSize: '15px',
+    fontWeight: 700,
+    cursor: 'pointer',
+    boxShadow: '0 14px 34px rgba(194,65,12,0.20)'
   },
-  cardIconWrap: {
-    width: '40px', height: '40px',
-    background: 'linear-gradient(135deg,#fff7ed,#ffedd5)',
-    borderRadius: '10px',
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-    fontSize: '20px', marginBottom: '12px'
+  ctaSecondaryButton: {
+    background: '#0f172a',
+    color: '#e6eef8',
+    border: '1px solid rgba(255,255,255,0.06)',
+    padding: '14px 30px',
+    borderRadius: '14px',
+    fontSize: '15px',
+    fontWeight: 700,
+    cursor: 'pointer'
   },
-  cardTitle: {
-    fontSize: '14px', fontWeight: 700,
-    color: '#1e293b', marginBottom: '4px'
+  footer: {
+    display: 'grid',
+    gridTemplateColumns: '1.4fr repeat(3, 1fr)',
+    gap: '30px',
+    padding: '36px 0',
+    borderTop: '1px solid rgba(255,255,255,0.08)'
   },
-  cardDesc: {
-    fontSize: '12px', color: '#94a3b8', lineHeight: 1.5
+  footerBrand: {
+    color: '#f97316',
+    fontWeight: 800,
+    letterSpacing: '0.4px',
+    marginBottom: '18px'
   },
-
-  // ── CTA buttons ──────────────────────────────────────────────
-  ctaRow: {
-    display: 'flex', gap: '12px', flexWrap: 'wrap'
+  footerText: {
+    color: '#475569',
+    fontSize: '14px',
+    fontWeight: 500,
+    lineHeight: 1.9
   },
-  btnPrimary: {
-    background: 'linear-gradient(135deg,#b45309,#f97316)',
-    color: '#fff', border: 'none',
-    padding: '13px 28px', borderRadius: '10px',
-    fontSize: '14px', fontWeight: 700,
-    cursor: 'pointer', transition: 'opacity 0.2s',
-    display: 'flex', alignItems: 'center', gap: '8px'
+  footerColumnTitle: {
+    color: '#020203',
+    fontWeight: 800,
+    fontSize: '15px',
+    marginBottom: '14px'
   },
-  btnSecondary: {
-    background: '#fff', color: '#1e293b',
-    border: '1.5px solid #e2e8f0',
-    padding: '13px 28px', borderRadius: '10px',
-    fontSize: '14px', fontWeight: 600,
-    cursor: 'pointer', transition: 'border-color 0.2s',
-    display: 'flex', alignItems: 'center', gap: '8px'
-  },
-
-  // ── Platforms comparison strip ───────────────────────────────
-  compareStrip: {
-    background: '#fff',
-    borderTop: '1px solid #e2e8f0',
-    padding: '20px 40px',
-    display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap'
-  },
-  compareLabel: {
-    fontSize: '12px', color: '#94a3b8', fontWeight: 600
-  },
-  compareBadge: {
-    fontSize: '12px', color: '#64748b',
-    background: '#f1f5f9', borderRadius: '6px',
-    padding: '4px 10px'
-  },
-  compareBadgeUs: {
-    fontSize: '12px', color: '#fff',
-    background: 'linear-gradient(135deg,#b45309,#f97316)',
-    borderRadius: '6px', padding: '4px 10px', fontWeight: 700
-  },
-
-  // ── Navbar (top of right) ────────────────────────────────────
-  navLink: {
-    fontSize: '13px', color: '#64748b',
-    cursor: 'pointer', fontWeight: 500,
-    padding: '6px 12px', borderRadius: '8px',
-    border: 'none', background: 'transparent',
-    transition: 'color 0.2s'
+  footerLink: {
+    color: '#475569',
+    fontSize: '14px',
+    fontWeight: 500,
+    lineHeight: 2,
+    cursor: 'pointer'
   }
 };
 
-// ── Feature data ─────────────────────────────────────────────
-const features = [
-  { icon: '🏗️', title: 'Verified Suppliers', desc: 'Admin-verified sellers only. Zero fraud risk on every transaction.' },
-  { icon: '⚖️', title: 'Wholesale & Retail', desc: 'Both pricing models on one platform. Compare prices instantly.' },
-  { icon: '📦', title: 'Bulk Bidding', desc: 'Submit bulk requests and let suppliers compete for your order.' },
-  { icon: '🔒', title: 'Secure Payments', desc: 'Stripe-powered payments with auto PDF invoice generation.' }
+const featureData = [
+  { icon: '🛡️', title: 'Verified Suppliers', desc: 'Every vendor is vetted through our detailed verification workflow.' },
+  { icon:'🔨'
+    , title: 'Bulk Bidding', desc: 'Place a request and let suppliers compete for your material order.' },
+  { icon: '🔒', title: 'Secure Payments', desc: 'Escrow-style fund release with instant invoice generation.' },
+  { icon: '📊', title: 'Real-time Analytics', desc: 'Track price shifts, demand signals, and supplier performance.' }
 ];
 
-// ── Role chips ───────────────────────────────────────────────
-const roles = ['Admin', 'Supplier', 'Wholesaler', 'Retailer', 'Customer'];
+const priceForecast = [
+  { label: 'Steel (Grade 60)', value: '+5.2%', note: 'Higher demand after recent cement orders.' },
+  { label: 'Cement (OPC)', value: '−0.8%', note: 'Local supply stabilized and freight costs eased.' },
+  { label: 'Bricks (A-Grade)', value: '+2.5%', note: 'Seasonal demand remains steady in urban projects.' }
+];
 
-// ============================================================
+const materials = [
+  { title: 'OPC Cement', subtitle: 'Ordinary Portland Cement', price: 'PKR 1,240/bag', image: 'https://images.unsplash.com/photo-1581094078250-3b94d1a3009f?auto=format&fit=crop&w=900&q=80' },
+  { title: 'Grade 60 Steel', subtitle: 'Deformed Bars', price: 'PKR 265/kg', image: 'https://images.unsplash.com/photo-1596495577886-d920f5a68f08?auto=format&fit=crop&w=900&q=80' },
+  { title: 'Red Bricks', subtitle: 'First-Class A-Grade', price: 'PKR 18.5/1k', image: 'https://images.unsplash.com/photo-1504222490345-289bb1aff0d0?auto=format&fit=crop&w=900&q=80' }
+];
+
 const LandingPage = () => {
   const navigate = useNavigate();
-  const [hoveredCard, setHoveredCard] = useState(null);
+  const location = useLocation();
+  const [hoveredFeature, setHoveredFeature] = useState(null);
+  const [pressedButton, setPressedButton] = useState(null);
+  const [navHover, setNavHover] = useState(null);
 
   return (
     <div style={S.page}>
-
-      {/* ═══════════ LEFT PANEL ═══════════ */}
-      <div style={S.left}>
-        <div style={S.leftBgCircle1} />
-        <div style={S.leftBgCircle2} />
-
-        {/* Logo */}
-        <div style={S.logo}>
-          <div style={S.logoIcon}>C</div>
-          <div>
-            <div style={S.logoText}>ConMat</div>
-            <div style={S.logoSub}>Construction Marketplace</div>
+      <div style={S.container}>
+        <header style={S.nav}>
+          <div style={S.brand}>
+            <div style={{...S.footerBrand, marginBottom: 0}}>ConMat</div>
           </div>
-        </div>
+          <div style={S.navLinks}>
+            <button
+              style={{...S.navLink, ...((location.pathname === '/marketplace' || navHover === '/marketplace') ? S.navLinkActive : {}), ...(pressedButton === '/marketplace' ? S.buttonPressed : {})}}
+              onClick={() => { navigate('/marketplace'); setNavHover(null); }}
+              onMouseDown={() => setPressedButton('/marketplace')}
+              onMouseUp={() => setPressedButton(null)}
+              onMouseEnter={() => setNavHover('/marketplace')}
+              onMouseLeave={() => { setNavHover(null); setPressedButton(null); }}
+              onFocus={() => setNavHover('/marketplace')}
+              onBlur={() => setNavHover(null)}
+              onTouchStart={() => setNavHover('/marketplace')}
+              onTouchEnd={() => setNavHover(null)}
+            >Marketplace</button>
+            <button
+              style={{...S.navLink, ...((location.pathname === '/analytics' || navHover === '/analytics') ? S.navLinkActive : {}), ...(pressedButton === '/analytics' ? S.buttonPressed : {})}}
+              onClick={() => { navigate('/analytics'); setNavHover(null); }}
+              onMouseDown={() => setPressedButton('/analytics')}
+              onMouseUp={() => setPressedButton(null)}
+              onMouseEnter={() => setNavHover('/analytics')}
+              onMouseLeave={() => { setNavHover(null); setPressedButton(null); }}
+              onFocus={() => setNavHover('/analytics')}
+              onBlur={() => setNavHover(null)}
+              onTouchStart={() => setNavHover('/analytics')}
+              onTouchEnd={() => setNavHover(null)}
+            >Analytics</button>
+            <button
+              style={{...S.navLink, ...((location.pathname === '/reports' || navHover === '/reports') ? S.navLinkActive : {}), ...(pressedButton === '/reports' ? S.buttonPressed : {})}}
+              onClick={() => { navigate('/reports'); setNavHover(null); }}
+              onMouseDown={() => setPressedButton('/reports')}
+              onMouseUp={() => setPressedButton(null)}
+              onMouseEnter={() => setNavHover('/reports')}
+              onMouseLeave={() => { setNavHover(null); setPressedButton(null); }}
+              onFocus={() => setNavHover('/reports')}
+              onBlur={() => setNavHover(null)}
+              onTouchStart={() => setNavHover('/reports')}
+              onTouchEnd={() => setNavHover(null)}
+            >Reports</button>
+          </div>
+          <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
+            <button style={S.iconButton} aria-label="Notifications">🔔</button>
+            <button style={S.iconButton} aria-label="Settings">⚙️</button>
+            <button
+              style={{...S.navButton, ...(pressedButton === '/register' ? S.buttonPressed : {})}}
+              onClick={() => navigate('/register')}
+              onMouseDown={() => setPressedButton('/register')}
+              onMouseUp={() => setPressedButton(null)}
+              onMouseLeave={() => setPressedButton(null)}
+            >Sign Up</button>
+          </div>
+        </header>
 
-        {/* Hero text */}
-        <div style={S.heroSection}>
-          <div style={S.heroTag}>🇵🇰 Pakistan's First Unified Platform</div>
-          <h1 style={S.heroTitle}>
-            Buy & Sell<br />
-            <span style={S.heroAccent}>Construction</span><br />
-            Materials Online
-          </h1>
-          <p style={S.heroDesc}>
-            Connect directly with verified suppliers, compare wholesale
-            and retail prices, place orders and track them — all in one place.
-            No more calling vendors manually.
-          </p>
-          <div style={S.statsRow}>
-            <div style={S.statItem}>
-              <span style={S.statNum}>5</span>
-              <span style={S.statLabel}>User Roles</span>
+        <section style={S.hero}>
+          <div style={S.heroIntro}>
+            <div style={S.heroBadge}>THE FUTURE OF PROCUREMENT</div>
+            <h1 style={S.heroTitle}>
+              The <span style={S.heroAccent}>ConMat</span><br />
+              Shift in Pakistan&apos;s<br />
+              Construction Industry
+            </h1>
+            <p style={S.heroText}>
+              Connecting verified suppliers, wholesalers, and retailers for a more transparent future.
+            </p>
+            <div style={S.heroCtas}>
+              <button
+                style={{...S.primaryButton, ...(pressedButton === 'start-sourcing' ? S.buttonPressed : {})}}
+                onClick={() => navigate('/marketplace')}
+                onMouseDown={() => setPressedButton('start-sourcing')}
+                onMouseUp={() => setPressedButton(null)}
+                onMouseLeave={() => setPressedButton(null)}
+              >Start Sourcing</button>
+              <button
+                style={{...S.secondaryButton, ...(pressedButton === 'register-supplier' ? S.buttonPressed : {})}}
+                onClick={() => navigate('/register')}
+                onMouseDown={() => setPressedButton('register-supplier')}
+                onMouseUp={() => setPressedButton(null)}
+                onMouseLeave={() => setPressedButton(null)}
+              >Register as Supplier</button>
             </div>
-            <div style={S.statItem}>
-              <span style={S.statNum}>100%</span>
-              <span style={S.statLabel}>Verified Sellers</span>
-            </div>
-            <div style={S.statItem}>
-              <span style={S.statNum}>Stripe</span>
-              <span style={S.statLabel}>Secure Payments</span>
-            </div>
           </div>
-        </div>
 
-        {/* Bottom: role chips + note */}
-        <div style={S.leftFooter}>
-          <div style={S.roleChips}>
-            {roles.map(r => (
-              <span key={r} style={S.chip}>{r}</span>
-            ))}
-          </div>
-          <div style={S.leftNote}>
-            Govt. Islamia Graduate College, Gujranwala · BSIT 2022–2026
-          </div>
-        </div>
-      </div>
+        </section>
 
-      {/* ═══════════ RIGHT PANEL ═══════════ */}
-      <div style={S.right}>
-
-        {/* Top navbar */}
-        <div style={S.rightTop}>
-          <button style={S.navLink} onClick={() => navigate('/login')}>
-            Sign In
-          </button>
-          <button
-            style={S.btnPrimary}
-            onClick={() => navigate('/register')}
-          >
-            Get Started →
-          </button>
-        </div>
-
-        {/* Main content */}
-        <div style={S.rightContent}>
-          <div style={S.sectionLabel}>Why ConMat?</div>
-          <h2 style={S.sectionTitle}>
-            Everything you need in<br />one marketplace
-          </h2>
-          <p style={S.sectionDesc}>
-            From cement to steel — browse products, compare bids,
-            pay securely and get digital invoices instantly.
-          </p>
-
-          {/* Feature cards */}
-          <div style={S.cardsGrid}>
-            {features.map((f, i) => (
+        <section style={S.featuresSection}>
+          {featureData.map((item, index) => {
+            const isWhite = item.title === 'Verified Suppliers' || item.title === 'Secure Payments';
+            const isOrange = item.title === 'Bulk Bidding';
+            const isAnalytic = item.title === 'Real-time Analytics';
+            return (
               <div
-                key={i}
+                key={item.title}
                 style={{
-                  ...S.card,
-                  boxShadow: hoveredCard === i ? '0 8px 30px rgba(0,0,0,0.10)' : '0 1px 4px rgba(0,0,0,0.04)',
-                  transform:  hoveredCard === i ? 'translateY(-3px)' : 'none'
+                  ...S.featureCard,
+                  background: isWhite ? '#ffffff' : isOrange ? '#d97706' : isAnalytic ? '#1e3a8a' : '#0f172a',
+                  border: isWhite ? '1px solid rgba(15,23,42,0.08)' : isOrange ? '1px solid rgba(217,119,6,0.24)' : isAnalytic ? '1px solid rgba(255,255,255,0.06)' : '1px solid rgba(255,255,255,0.08)',
+                  transform: hoveredFeature === index ? 'translateY(-6px)' : 'none',
+                  boxShadow: hoveredFeature === index ? '0 26px 60px rgba(0,0,0,0.20)' : '0 0 0 rgba(0,0,0,0)'
                 }}
-                onMouseEnter={() => setHoveredCard(i)}
-                onMouseLeave={() => setHoveredCard(null)}
+                onMouseEnter={() => setHoveredFeature(index)}
+                onMouseLeave={() => setHoveredFeature(null)}
               >
-                <div style={S.cardIconWrap}>{f.icon}</div>
-                <div style={S.cardTitle}>{f.title}</div>
-                <div style={S.cardDesc}>{f.desc}</div>
+                <div
+                  style={{
+                    ...S.featureIcon,
+                    background: isWhite ? '#fef3c7' : isOrange ? '#fbe7c6' : isAnalytic ? '#274be0' : '#1e3a8a',
+                    color: isWhite ? '#b45309' : isOrange ? '#b45309' : isAnalytic ? '#ffffff' : '#fff'
+                  }}
+                >
+                  {item.icon}
+                </div>
+                <div style={{ ...S.featureTitle, color: isWhite ? '#111827' : '#fff' }}>{item.title}</div>
+                <div style={{ ...S.featureDesc, color: isWhite ? '#475569' : isAnalytic ? '#dbeafe' : isOrange ? '#fff' : '#cbd5e1' }}>{item.desc}</div>
+              </div>
+            );
+          })}
+        </section>
+
+        <section style={S.forecastSection}>
+          <div style={S.forecastHeader}>
+            <div>
+              <div style={S.forecastTag}>Price Forecast Q4 2024</div>
+              <div style={S.forecastTitle}>Predictive market trends based on industrial output and import data.</div>
+              <div style={S.forecastDesc}>Industry indicators for steel, cement, and bricks in Pakistan.</div>
+            </div>
+          </div>
+          <div style={S.forecastGrid}>
+            {priceForecast.map((item) => (
+              <div key={item.label} style={S.forecastCard}>
+                <div style={S.forecastTagSmall}>{item.label}</div>
+                <div style={S.forecastValue}>{item.value}</div>
+                <div style={S.forecastNote}>{item.note}</div>
               </div>
             ))}
           </div>
+        </section>
 
-          {/* CTA buttons */}
-          <div style={S.ctaRow}>
+        <section style={S.materialsSection}>
+          <div style={S.materialsHeader}>
+            <div>
+              <div style={S.materialsTitle}>Materials</div>
+              <div style={S.heroText}>Sourced from the nation&apos;s most reliable industrial plants, specifically graded for local terrain and climate.</div>
+            </div>
             <button
-              style={S.btnPrimary}
-              onClick={() => navigate('/register')}
-              onMouseEnter={e => e.currentTarget.style.opacity = '0.88'}
-              onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-            >
-              🚀 Create Free Account
-            </button>
-            <button
-              style={S.btnSecondary}
-              onClick={() => navigate('/login')}
-              onMouseEnter={e => e.currentTarget.style.borderColor = '#b45309'}
-              onMouseLeave={e => e.currentTarget.style.borderColor = '#e2e8f0'}
-            >
-              🔑 Sign In
-            </button>
+              style={{...S.materialsLink, ...(pressedButton === 'view-marketplace' ? S.buttonPressed : {})}}
+              onClick={() => navigate('/marketplace')}
+              onMouseDown={() => setPressedButton('view-marketplace')}
+              onMouseUp={() => setPressedButton(null)}
+              onMouseLeave={() => setPressedButton(null)}
+            >View Marketplace</button>
           </div>
-        </div>
+          <div style={S.productGrid}>
+            {materials.map((item) => (
+              <div key={item.title} style={S.productCard}>
+                <div style={{ ...S.productImage, backgroundImage: `url(${item.image})` }} />
+                <div style={S.productInfo}>
+                  <div style={S.productName}>{item.title}</div>
+                  <div style={S.productMeta}>{item.subtitle}</div>
+                  <div style={S.productPrice}>{item.price}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
-        {/* Comparison strip */}
-        <div style={S.compareStrip}>
-          <span style={S.compareLabel}>vs. existing platforms:</span>
-          <span style={S.compareBadge}>Zarea.pk – wholesale only</span>
-          <span style={S.compareBadge}>Home Point – retail only</span>
-          <span style={S.compareBadge}>Alibaba – not localized</span>
-          <span style={S.compareBadgeUs}>ConMat – both ✓ bidding ✓ verified ✓</span>
-        </div>
+        <section style={S.ctaBanner}>
+          <div style={S.ctaBannerText}>
+            <div style={S.ctaBannerTitle}>Ready to rebuild the backbone of Pakistan?</div>
+            <div style={S.ctaBannerDesc}>Join the digital infrastructure that powers the nation&apos;s progress. Transact in PKR with confidence.</div>
+          </div>
+          <div style={S.ctaBannerButtons}>
+            <button
+              style={{...S.ctaPrimaryButton, ...(pressedButton === 'create-account' ? S.buttonPressed : {})}}
+              onClick={() => navigate('/register')}
+              onMouseDown={() => setPressedButton('create-account')}
+              onMouseUp={() => setPressedButton(null)}
+              onMouseLeave={() => setPressedButton(null)}
+            >Create Free Account</button>
+            <button
+              style={{...S.ctaSecondaryButton, ...(pressedButton === 'talk-expert' ? S.buttonPressed : {})}}
+              onClick={() => navigate('/login')}
+              onMouseDown={() => setPressedButton('talk-expert')}
+              onMouseUp={() => setPressedButton(null)}
+              onMouseLeave={() => setPressedButton(null)}
+            >Talk to an Expert</button>
+          </div>
+        </section>
+
+        <footer style={S.footer}>
+          <div>
+            <div style={S.footerBrand}>ConMat</div>
+            <div style={S.footerText}>Pakistan&apos;s premier industrial procurement marketplace. Digitizing supply chains from the ground up.</div>
+          </div>
+          <div>
+            <div style={S.footerColumnTitle}>Materials</div>
+            <div style={S.footerLink}>Steel Grade 60</div>
+            <div style={S.footerLink}>OPC Cement</div>
+            <div style={S.footerLink}>Red Bricks</div>
+          </div>
+          <div>
+            <div style={S.footerColumnTitle}>Company</div>
+            <div style={S.footerLink}>About Us</div>
+            <div style={S.footerLink}>Privacy Policy</div>
+            <div style={S.footerLink}>Terms of Service</div>
+          </div>
+          <div>
+            <div style={S.footerColumnTitle}>Resources</div>
+            <div style={S.footerLink}>Price Trends</div>
+            <div style={S.footerLink}>Supplier FAQ</div>
+            <div style={S.footerLink}>Contact Us</div>
+          </div>
+        </footer>
       </div>
     </div>
   );

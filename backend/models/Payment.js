@@ -1,7 +1,3 @@
-// ============================================================
-//  models/Payment.js  (Muhammad Nosherwan – 076926)
-//  Payment model – stored in payments_db
-// ============================================================
 const { DataTypes } = require('sequelize');
 const paymentsDB = require('../config/db.payments');
 

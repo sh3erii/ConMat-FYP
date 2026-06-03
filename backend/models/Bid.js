@@ -1,7 +1,3 @@
-// ============================================================
-//  models/Bid.js  (Muhammad Nosherwan – 076926)
-//  Bid model – stored in bids_db
-// ============================================================
 const { DataTypes } = require('sequelize');
 const bidsDB = require('../config/db.bids');
 

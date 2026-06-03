@@ -1,18 +1,16 @@
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 
-// ── Create transporter (Gmail SMTP with App Password) ────────
 const transporter = nodemailer.createTransport({
   host:   process.env.EMAIL_HOST || 'smtp.gmail.com',
   port:   parseInt(process.env.EMAIL_PORT) || 587,
   secure: false,  // true for port 465, false for 587
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS   // Gmail App Password (not your Gmail password)
+    pass: process.env.EMAIL_PASS 
   }
-});
+  });
 
-// Verify transporter on startup
 transporter.verify((err) => {
   if (err) {
     console.error('❌ Email transporter error:', err.message);
@@ -21,7 +19,6 @@ transporter.verify((err) => {
   }
 });
 
-// ── Generic send function ─────────────────────────────────────
 const sendEmail = async ({ to, subject, html, text }) => {
   const mailOptions = {
     from:    process.env.EMAIL_FROM || 'ConMat <noreply@conmat.pk>',
@@ -33,7 +30,6 @@ const sendEmail = async ({ to, subject, html, text }) => {
   return await transporter.sendMail(mailOptions);
 };
 
-// ── Template: Order Confirmation ─────────────────────────────
 const sendOrderConfirmation = async ({ to, buyerName, orderId, totalAmount }) => {
   return sendEmail({
     to,
@@ -62,7 +58,6 @@ const sendOrderConfirmation = async ({ to, buyerName, orderId, totalAmount }) =>
   });
 };
 
-// ── Template: Supplier Verification Result ───────────────────
 const sendVerificationResult = async ({ to, supplierName, status }) => {
   const approved = status === 'Approved';
   return sendEmail({
@@ -89,7 +84,6 @@ const sendVerificationResult = async ({ to, supplierName, status }) => {
   });
 };
 
-// ── Template: New Bid Request (to suppliers) ─────────────────
 const sendBidRequestNotification = async ({ to, supplierName, productName, requiredQty }) => {
   return sendEmail({
     to,
@@ -117,7 +111,6 @@ const sendBidRequestNotification = async ({ to, supplierName, productName, requi
   });
 };
 
-// ── Template: Bid Accepted (to winning supplier) ─────────────
 const sendBidAcceptedNotification = async ({ to, supplierName, orderId, bidAmount }) => {
   return sendEmail({
     to,
@@ -149,3 +142,9 @@ module.exports = {
   sendBidRequestNotification,
   sendBidAcceptedNotification
 };
+
+sendEmail({
+  to: 'nosherwaannn@gmail.com',
+  subject: 'ConMat email test',
+  html: '<h1>Email works!</h1>'
+}).then(() => console.log('Email sent!')).catch(console.error);

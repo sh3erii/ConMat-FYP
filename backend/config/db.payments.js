@@ -1,7 +1,3 @@
-// ============================================================
-//  config/db.payments.js  (Muhammad Nosherwan – 076926)
-//  Sequelize connection for payments_db (PostgreSQL)
-// ============================================================
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 

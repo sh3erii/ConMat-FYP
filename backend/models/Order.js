@@ -1,7 +1,3 @@
-// ============================================================
-//  models/Order.js  (Muhammad Nosherwan – 076926)
-//  Order model – stored in orders_db
-// ============================================================
 const { DataTypes } = require('sequelize');
 const ordersDB = require('../config/db.orders');
 

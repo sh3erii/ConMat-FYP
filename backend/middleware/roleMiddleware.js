@@ -1,10 +1,3 @@
-// ============================================================
-//  middleware/roleMiddleware.js  (Hafiz Abdul Rehman – 077011)
-//  Restricts routes to specific user roles
-//  Usage: router.get('/admin-only', protect, authorize('Admin'), handler)
-//         router.get('/multi',      protect, authorize('Admin', 'Supplier'), handler)
-// ============================================================
-
 const authorize = (...roles) => {
   return (req, res, next) => {
     // req.user is set by authMiddleware (protect)

@@ -1,0 +1,136 @@
+{
+  "info": {
+    "name": "ConMat Day 2 - Product Inventory",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api"
+    },
+    {
+      "key": "token",
+      "value": "paste_jwt_here"
+    },
+    {
+      "key": "productId",
+      "value": "paste_product_id_here"
+    }
+  ],
+  "item": [
+    {
+      "name": "List Products",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/products?search=cement&pricing=retail&sort=newest"
+      }
+    },
+    {
+      "name": "Create Product (multipart)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "name",
+              "value": "Bestway OPC Cement",
+              "type": "text"
+            },
+            {
+              "key": "category",
+              "value": "Cement",
+              "type": "text"
+            },
+            {
+              "key": "brand",
+              "value": "Bestway",
+              "type": "text"
+            },
+            {
+              "key": "unit",
+              "value": "bag",
+              "type": "text"
+            },
+            {
+              "key": "retailPrice",
+              "value": "1240",
+              "type": "text"
+            },
+            {
+              "key": "wholesalePrice",
+              "value": "1190",
+              "type": "text"
+            },
+            {
+              "key": "minWholesaleQty",
+              "value": "100",
+              "type": "text"
+            },
+            {
+              "key": "stock",
+              "value": "500",
+              "type": "text"
+            },
+            {
+              "key": "city",
+              "value": "Gujranwala",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "value": "Fresh stock OPC cement for residential and commercial projects.",
+              "type": "text"
+            },
+            {
+              "key": "image",
+              "type": "file",
+              "src": []
+            }
+          ]
+        },
+        "url": "{{baseUrl}}/products"
+      }
+    },
+    {
+      "name": "My Products",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/products/mine"
+      }
+    },
+    {
+      "name": "Update Stock",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"stock\": 450\n}"
+        },
+        "url": "{{baseUrl}}/products/{{productId}}/stock"
+      }
+    }
+  ]
+}

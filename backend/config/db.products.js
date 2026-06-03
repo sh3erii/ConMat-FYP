@@ -1,7 +1,3 @@
-// ============================================================
-//  config/db.products.js  (Hafiz Abdul Rehman – 077011)
-//  Sequelize connection for products_db (PostgreSQL)
-// ============================================================
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 

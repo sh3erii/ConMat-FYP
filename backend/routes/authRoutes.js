@@ -1,7 +1,3 @@
-// ============================================================
-//  routes/authRoutes.js  (Hafiz Abdul Rehman – 077011)
-//  Auth routes: Register, Login, Get Profile
-// ============================================================
 const express  = require('express');
 const router   = express.Router();
 const protect  = require('../middleware/authMiddleware');

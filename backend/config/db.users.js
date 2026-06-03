@@ -1,7 +1,3 @@
-// ============================================================
-//  config/db.users.js  (Hafiz Abdul Rehman – 077011)
-//  Sequelize connection for users_db (PostgreSQL)
-// ============================================================
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
@@ -27,9 +23,9 @@ const usersDB = new Sequelize(
 (async () => {
   try {
     await usersDB.authenticate();
-    console.log('✅ users_db connected successfully.');
+    console.log('users_db connected successfully.');
   } catch (err) {
-    console.error('❌ users_db connection failed:', err.message);
+    console.error('users_db connection failed:', err.message);
   }
 })();
 

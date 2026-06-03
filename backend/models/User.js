@@ -1,7 +1,3 @@
-// ============================================================
-//  models/User.js  (Hafiz Abdul Rehman – 077011)
-//  User model – stored in users_db
-// ============================================================
 const { DataTypes } = require('sequelize');
 const usersDB = require('../config/db.users');
 

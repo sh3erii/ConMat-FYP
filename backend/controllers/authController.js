@@ -1,12 +1,7 @@
-// ============================================================
-//  controllers/authController.js  (Hafiz Abdul Rehman – 077011)
-//  Handles: Register, Login
-// ============================================================
 const bcrypt = require('bcryptjs');
 const jwt    = require('jsonwebtoken');
 const User   = require('../models/User');
 
-// ── Helper: generate JWT token ───────────────────────────────
 const generateToken = (user) => {
   return jwt.sign(
     {
@@ -19,9 +14,7 @@ const generateToken = (user) => {
   );
 };
 
-// ────────────────────────────────────────────────────────────
-//  POST /api/auth/register
-// ────────────────────────────────────────────────────────────
+
 const register = async (req, res) => {
   try {
     const { name, email, phone, password, role, companyName } = req.body;
@@ -94,9 +87,7 @@ const register = async (req, res) => {
   }
 };
 
-// ────────────────────────────────────────────────────────────
-//  POST /api/auth/login
-// ────────────────────────────────────────────────────────────
+
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -167,9 +158,7 @@ const login = async (req, res) => {
   }
 };
 
-// ────────────────────────────────────────────────────────────
-//  GET /api/auth/me  (get logged-in user profile)
-// ────────────────────────────────────────────────────────────
+
 const getMe = async (req, res) => {
   try {
     // req.user is set by authMiddleware

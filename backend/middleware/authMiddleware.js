@@ -1,7 +1,3 @@
-// ============================================================
-//  middleware/authMiddleware.js  (Hafiz Abdul Rehman – 077011)
-//  Verifies JWT token on every protected route
-// ============================================================
 const jwt = require('jsonwebtoken');
 
 const protect = (req, res, next) => {

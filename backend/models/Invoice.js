@@ -1,6 +1,7 @@
 // ============================================================
-//  models/Invoice.js  (Muhammad Nosherwan – 076926)
-//  Day 2 – Invoice model stored in payments_db
+//  models/Invoice.js
+//  Owner: Muhammad Nosherwan (076926)
+//  Day 5 – invoice records stored in payments_db
 // ============================================================
 const { DataTypes } = require('sequelize');
 const paymentsDB = require('../config/db.payments');
@@ -12,64 +13,68 @@ const Invoice = paymentsDB.define('Invoice', {
     primaryKey: true
   },
   invoiceNumber: {
-    type: DataTypes.STRING(40),
+    type: DataTypes.STRING(80),
     allowNull: false,
     unique: true
   },
   orderId: {
     type: DataTypes.UUID,
-    allowNull: false,
-    comment: 'Cross-database reference to orders_db.orders.id'
-  },
-  paymentId: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    comment: 'Reference to payments_db.payments.id'
+    allowNull: false
   },
   buyerId: {
     type: DataTypes.UUID,
-    allowNull: false,
-    comment: 'Cross-database reference to users_db.users.id'
+    allowNull: true
+  },
+  paymentId: {
+    type: DataTypes.UUID,
+    allowNull: true
   },
   subtotal: {
-    type: DataTypes.DECIMAL(12, 2),
-    allowNull: false
-  },
-  taxAmount: {
     type: DataTypes.DECIMAL(12, 2),
     allowNull: false,
     defaultValue: 0
   },
-  totalAmount: {
+  deliveryFee: {
     type: DataTypes.DECIMAL(12, 2),
-    allowNull: false
-  },
-  currency: {
-    type: DataTypes.STRING(10),
     allowNull: false,
-    defaultValue: 'pkr'
+    defaultValue: 0
   },
-  pdfUrl: {
-    type: DataTypes.STRING,
-    allowNull: true
+  tax: {
+    type: DataTypes.DECIMAL(12, 2),
+    allowNull: false,
+    defaultValue: 0
+  },
+  total: {
+    type: DataTypes.DECIMAL(12, 2),
+    allowNull: false,
+    defaultValue: 0
   },
   status: {
-    type: DataTypes.ENUM('Generated', 'Sent', 'Cancelled'),
+    type: DataTypes.ENUM('Draft', 'Issued', 'Paid', 'Cancelled'),
     allowNull: false,
-    defaultValue: 'Generated'
+    defaultValue: 'Issued'
   },
   issuedAt: {
     type: DataTypes.DATE,
     allowNull: false,
     defaultValue: DataTypes.NOW
+  },
+  paidAt: {
+    type: DataTypes.DATE,
+    allowNull: true
   }
 }, {
   tableName: 'invoices',
-  timestamps: true
+  timestamps: true,
+  indexes: [
+    { fields: ['invoiceNumber'] },
+    { fields: ['orderId'] },
+    { fields: ['buyerId'] }
+  ]
 });
 
 paymentsDB.sync({ alter: true })
-  .then(() => console.log('📋 invoices table synced.'))
+  .then(() => console.log('🧾 invoices table synced.'))
   .catch((err) => console.error('❌ invoices table sync failed:', err.message));
 
 module.exports = Invoice;

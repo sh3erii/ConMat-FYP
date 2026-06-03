@@ -1,6 +1,6 @@
 // ============================================================
 //  routes/bidRoutes.js  (Muhammad Nosherwan – 076926)
-//  Day 2 – Bidding routes
+//  Day 4 – Complete bidding routes
 // ============================================================
 const express = require('express');
 const router = express.Router();
@@ -10,19 +10,28 @@ const {
   createBidRequest,
   getOpenBidRequests,
   getMyBidRequests,
+  getMyBidOffers,
   submitBidOffer,
   getOffersForRequest,
   cancelMyBidOffer,
-  acceptBidOffer
+  acceptBidOffer,
+  cancelBidRequest,
+  getBiddingDashboard
 } = require('../controllers/bidController');
 
-router.post('/requests', protect, authorize('Wholesaler', 'Retailer', 'Admin'), createBidRequest);
-router.get('/requests/open', protect, authorize('Supplier', 'Wholesaler', 'Retailer', 'Admin'), getOpenBidRequests);
-router.get('/requests/mine', protect, authorize('Wholesaler', 'Retailer', 'Admin'), getMyBidRequests);
-router.get('/requests/:requestId/offers', protect, authorize('Wholesaler', 'Retailer', 'Admin'), getOffersForRequest);
+router.use(protect);
 
-router.post('/offers', protect, authorize('Supplier', 'Wholesaler', 'Retailer', 'Admin'), submitBidOffer);
-router.patch('/offers/:offerId/cancel', protect, authorize('Supplier', 'Wholesaler', 'Retailer', 'Admin'), cancelMyBidOffer);
-router.patch('/offers/:offerId/accept', protect, authorize('Wholesaler', 'Retailer', 'Admin'), acceptBidOffer);
+router.get('/dashboard', authorize('Supplier', 'Wholesaler', 'Retailer', 'Admin'), getBiddingDashboard);
+
+router.post('/requests', authorize('Wholesaler', 'Retailer', 'Admin'), createBidRequest);
+router.get('/requests/open', authorize('Supplier', 'Wholesaler', 'Retailer', 'Admin'), getOpenBidRequests);
+router.get('/requests/mine', authorize('Wholesaler', 'Retailer', 'Admin'), getMyBidRequests);
+router.get('/requests/:requestId/offers', authorize('Wholesaler', 'Retailer', 'Admin'), getOffersForRequest);
+router.patch('/requests/:requestId/cancel', authorize('Wholesaler', 'Retailer', 'Admin'), cancelBidRequest);
+
+router.get('/offers/mine', authorize('Supplier', 'Wholesaler', 'Retailer', 'Admin'), getMyBidOffers);
+router.post('/offers', authorize('Supplier', 'Wholesaler', 'Retailer', 'Admin'), submitBidOffer);
+router.patch('/offers/:offerId/cancel', authorize('Supplier', 'Wholesaler', 'Retailer', 'Admin'), cancelMyBidOffer);
+router.patch('/offers/:offerId/accept', authorize('Wholesaler', 'Retailer', 'Admin'), acceptBidOffer);
 
 module.exports = router;

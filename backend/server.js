@@ -13,6 +13,13 @@ const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const bidRoutes = require('./routes/bidRoutes');
+const orderRoutes = require('./routes/orderRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
+const supplierInventoryRoutes = require('./routes/supplierInventoryRoutes');
+const bidRoutes = require('./routes/bidRoutes');
+const checkoutRoutes = require('./routes/checkoutRoutes');
+const invoiceRoutes = require('./routes/invoiceRoutes');
 
 const app = express();
 
@@ -43,6 +50,13 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/bids', bidRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/seller/inventory', supplierInventoryRoutes);
+app.use('/api/bids', bidRoutes);
+app.use('/api/checkout', checkoutRoutes);
+app.use('/api/invoices', invoiceRoutes);
 
 // Health check
 app.get('/', (req, res) => {

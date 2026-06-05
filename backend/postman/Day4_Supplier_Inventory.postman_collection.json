@@ -1,0 +1,103 @@
+{
+  "info": {
+    "name": "ConMat Day 4 - Supplier Inventory",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api"
+    },
+    {
+      "key": "token",
+      "value": "PASTE_JWT_TOKEN_HERE"
+    },
+    {
+      "key": "productId",
+      "value": "PASTE_PRODUCT_ID_HERE"
+    }
+  ],
+  "item": [
+    {
+      "name": "Inventory Summary",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/seller/inventory/summary"
+      }
+    },
+    {
+      "name": "Low Stock Products",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/seller/inventory/low-stock?threshold=25"
+      }
+    },
+    {
+      "name": "Stock Movements",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/seller/inventory/movements"
+      }
+    },
+    {
+      "name": "Update Product Stock",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"stock\": 150,\n  \"reason\": \"Restocked from warehouse\",\n  \"movementType\": \"Restock\"\n}"
+        },
+        "url": "{{baseUrl}}/seller/inventory/products/{{productId}}/stock"
+      }
+    },
+    {
+      "name": "Bulk Stock Update",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reason\": \"Weekly inventory count\",\n  \"updates\": [\n    {\n      \"productId\": \"{{productId}}\",\n      \"stock\": 220\n    }\n  ]\n}"
+        },
+        "url": "{{baseUrl}}/seller/inventory/bulk-stock"
+      }
+    }
+  ]
+}

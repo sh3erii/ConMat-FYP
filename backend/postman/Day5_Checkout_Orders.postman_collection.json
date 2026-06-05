@@ -1,0 +1,103 @@
+{
+  "info": {
+    "name": "ConMat Day5 Checkout Orders",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api"
+    },
+    {
+      "key": "token",
+      "value": "PASTE_JWT_TOKEN_HERE"
+    },
+    {
+      "key": "orderId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Checkout Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/checkout/orders",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"buyerName\": \"Demo Buyer\",\n  \"phone\": \"03001234567\",\n  \"city\": \"Gujranwala\",\n  \"address\": \"Main GT Road\",\n  \"paymentMethod\": \"stripe\",\n  \"items\": [\n    {\n      \"productId\": 1,\n      \"sellerId\": 4,\n      \"name\": \"Maple Leaf Cement 50kg\",\n      \"quantity\": 20,\n      \"unit\": \"bags\",\n      \"unitPrice\": 1400\n    }\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "Get My Orders",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/checkout/orders/my"
+      }
+    },
+    {
+      "name": "Get Order Detail",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/checkout/orders/{{orderId}}"
+      }
+    },
+    {
+      "name": "Cancel Order",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/checkout/orders/{{orderId}}/cancel",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reason\": \"Buyer requested cancellation before dispatch.\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Get Status History",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/checkout/orders/{{orderId}}/status-history"
+      }
+    }
+  ]
+}

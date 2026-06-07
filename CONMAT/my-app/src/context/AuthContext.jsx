@@ -3,6 +3,7 @@
 //  Global auth state – wraps the whole app
 // ============================================================
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import api from '../services/api';
 
 const AuthContext = createContext(null);
 
@@ -37,8 +38,31 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('conmat_user');
   };
 
+  const loginRequest = async (credentials) => {
+    const { data } = await api.post('/auth/login', credentials);
+    if (data?.user && data?.token) {
+      login(data.user, data.token);
+    }
+    return data;
+  };
+
+  const registerRequest = async (payload) => {
+    const formData = new FormData();
+    Object.entries(payload).forEach(([key, value]) => {
+      if (value === undefined || value === null) return;
+      formData.append(key, value);
+    });
+
+    // We omit the Content-Type header so Axios/Browser can automatically
+    // generate the correct multipart/form-data header with the boundary
+    const { data } = await api.post('/auth/register', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+    return data;
+  };
+
   return (
-    <AuthContext.Provider value={{ user, token, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, token, loading, login, logout, loginRequest, registerRequest }}>
       {children}
     </AuthContext.Provider>
   );

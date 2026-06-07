@@ -1,26 +1,43 @@
-// ============================================================
-//  src/App.jsx
-//  Root component – sets up all routes
-// ============================================================
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import DashboardRedirect from './pages/DashboardRedirect';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
-// ── Protected Route wrapper ──────────────────────────────────
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children, allowedRoles = [] }) => {
   const { user, loading } = useAuth();
-  if (loading) return <div className="d-flex justify-content-center align-items-center" style={{height:'100vh'}}><div className="spinner-border text-warning" /></div>;
-  return user ? children : <Navigate to="/login" replace />;
+
+  if (loading) {
+    return (
+      <div className="app-loading-screen">
+        <div className="app-loading-card">
+          <span className="app-loading-logo">C</span>
+          <p>Loading ConMat...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) return <Navigate to="/login" replace />;
+
+  if (allowedRoles.length && !allowedRoles.includes(user.role)) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  return children;
 };
 
-// Placeholder pages (will be built Day 2+)
-const ComingSoon = ({ page }) => (
-  <div style={{ background: '#1e293b', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-    <div style={{ textAlign: 'center', color: '#fff' }}>
-      <h2 style={{ color: '#f97316' }}>ConMat</h2>
-      <p>{page} – Coming Day 2</p>
+const ComingSoon = ({ title, note }) => (
+  <div className="app-coming-soon">
+    <div className="app-coming-card">
+      <span className="app-coming-chip">Day 3+</span>
+      <h1>{title}</h1>
+      <p>{note}</p>
+      <a href="/dashboard">Back to dashboard</a>
     </div>
   </div>
 );
@@ -30,12 +47,40 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/"          element={<LandingPage />} />
-          <Route path="/login"     element={<ComingSoon page="Login" />} />
-          <Route path="/register"  element={<ComingSoon page="Register" />} />
-          <Route path="/marketplace" element={<ProtectedRoute><ComingSoon page="Marketplace" /></ProtectedRoute>} />
-          <Route path="/dashboard"   element={<ProtectedRoute><ComingSoon page="Dashboard" /></ProtectedRoute>} />
-          <Route path="*"          element={<Navigate to="/" replace />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardRedirect />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/marketplace"
+            element={
+              <ProtectedRoute>
+                <ComingSoon
+                  title="Marketplace"
+                  note="Marketplace grid and ProductCard integration will be added in the next frontend batch."
+                />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/analytics"
+            element={
+              <ProtectedRoute allowedRoles={["Admin", "Supplier", "Wholesaler", "Retailer"]}>
+                <ComingSoon
+                  title="Analytics"
+                  note="Reports and analytics screens are scheduled after the core CRUD APIs are merged."
+                />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
     </AuthProvider>

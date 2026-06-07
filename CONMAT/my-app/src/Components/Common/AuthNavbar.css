@@ -1,0 +1,63 @@
+.auth-nav {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+  padding: 0;
+  display: block;
+  width: 100%;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.auth-nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.auth-nav__logo {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #f97316, #b45309);
+  color: #ffffff;
+  font-weight: 900;
+  box-shadow: 0 14px 34px rgba(180, 83, 9, 0.28);
+}
+
+.auth-nav__brand strong {
+  display: block;
+  font-size: 1.2rem;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.auth-nav__brand small {
+  display: block;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.72rem;
+  margin-top: 3px;
+}
+
+.auth-nav__exit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: inherit;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.auth-nav__exit:hover {
+  background: transparent;
+  transform: scale(1.05);
+  color: #f97316;
+}

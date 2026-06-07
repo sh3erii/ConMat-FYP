@@ -1,476 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-
-const S = {
-  page: {
-    minHeight: '100vh',
-    background: '#ffffff',
-    color: '#0f172a',
-    fontFamily: "'Segoe UI', Arial, sans-serif",
-    overflowX: 'hidden'
-  },
-  container: {
-    maxWidth: '1320px',
-    margin: '0 auto',
-    padding: '24px 32px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '60px'
-  },
-  nav: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    gap: '24px'
-  },
-  brand: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '10px'
-  },
-  iconButton: {
-    background: 'transparent',
-    border: 'none',
-    fontSize: '18px',
-    padding: '8px',
-    cursor: 'pointer',
-    color: '#475569'
-  },
-  brandMark: {
-    width: '42px',
-    height: '42px',
-    borderRadius: '12px',
-    background: 'linear-gradient(135deg,#f97316,#b45309)',
-    boxShadow: '0 16px 45px rgba(249,115,22,.2)',
-    display: 'grid',
-    placeItems: 'center',
-    color: '#fff',
-    fontWeight: 900,
-    fontSize: '18px'
-  },
-  brandText: {
-    fontSize: '20px',
-    fontWeight: 800,
-    letterSpacing: '-0.6px',
-    color: '#111827'
-  },
-  navLinks: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '28px'
-  },
-  navLink: {
-    color: '#475569',
-    fontSize: '14px',
-    fontWeight: 500,
-    background: 'transparent',
-    border: 'none',
-    cursor: 'pointer',
-    transition: 'color 0.2s'
-  },
-  navLinkActive: {
-    color: '#f97316'
-  },
-  buttonPressed: {
-    transform: 'translateY(2px)',
-    opacity: 0.95,
-    boxShadow: 'none'
-  },
-  navButton: {
-    borderRadius: '18px',
-    border: 'none',
-    padding: '10px 24px',
-    fontSize: '13px',
-    color: '#fff',
-    background: '#f97316',
-    cursor: 'pointer',
-    transition: 'background 0.2s, transform 0.2s'
-  },
-  hero: {
-    display: 'grid',
-    gridTemplateColumns: '1.1fr 0.9fr',
-    gap: '32px',
-    alignItems: 'center'
-  },
-  heroIntro: {
-    maxWidth: '660px'
-  },
-  heroBadge: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '10px',
-    color: '#b45309',
-    background: 'rgba(254, 215, 170, 0.35)',
-    padding: '12px 18px',
-    borderRadius: '999px',
-    fontSize: '12px',
-    fontWeight: 700,
-    letterSpacing: '1px',
-    marginBottom: '24px'
-  },
-  heroTitle: {
-    fontSize: '56px',
-    lineHeight: 1.03,
-    fontWeight: 800,
-    marginBottom: '24px',
-    color: '#111827'
-  },
-  heroAccent: {
-    color: '#f97316'
-  },
-  heroText: {
-    fontSize: '17px',
-    lineHeight: 1.9,
-    color: '#475569',
-    marginBottom: '32px'
-  },
-  heroCtas: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '12px'
-  },
-  primaryButton: {
-    background: '#c2410c',
-    color: '#fff',
-    border: 'none',
-    padding: '12px 24px',
-    borderRadius: '12px',
-    fontSize: '14px',
-    fontWeight: 700,
-    cursor: 'pointer',
-    boxShadow: '0 12px 28px rgba(194,65,12,0.20)'
-  },
-  secondaryButton: {
-    background: '#1d4ed8',
-    color: '#fff',
-    border: '1px solid rgba(29,78,216,0.24)',
-    padding: '12px 24px',
-    borderRadius: '12px',
-    fontSize: '14px',
-    fontWeight: 700,
-    cursor: 'pointer'
-  },
-  heroVisual: {
-    position: 'relative',
-    minHeight: '540px',
-    borderRadius: '38px',
-    overflow: 'hidden',
-    background: '#f8fafc',
-    padding: '32px',
-    boxShadow: '0 30px 80px rgba(15,23,42,0.12)'
-  },
-  heroVisualImage: {
-    position: 'absolute',
-    inset: 0,
-    backgroundImage: 'url(https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80)',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    opacity: 0.18,
-    filter: 'grayscale(70%)'
-  },
-  heroOverlay: {
-    position: 'absolute',
-    inset: 0,
-    background: 'linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.95))'
-  },
-  heroStatsCard: {
-    position: 'relative',
-    zIndex: 1,
-    width: '100%',
-    minHeight: '420px',
-    borderRadius: '30px',
-    background: '#111827',
-    border: '1px solid rgba(255,255,255,0.08)',
-    padding: '34px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between'
-  },
-  heroStatTag: {
-    fontSize: '13px',
-    letterSpacing: '1.4px',
-    textTransform: 'uppercase',
-    color: '#94a3b8',
-    marginBottom: '26px'
-  },
-  heroStatTitle: {
-    fontSize: '32px',
-    fontWeight: 800,
-    color: '#fff',
-    marginBottom: '18px'
-  },
-  heroMiniStats: {
-    display: 'grid',
-    gap: '14px'
-  },
-  heroMiniItem: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '18px 20px',
-    borderRadius: '20px',
-    background: 'rgba(255,255,255,0.04)'
-  },
-  heroMiniKey: {
-    color: '#cbd5e1',
-    fontSize: '13px'
-  },
-  heroMiniValue: {
-    fontWeight: 700,
-    color: '#fff'
-  },
-  featuresSection: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(2, minmax(0,1fr))',
-    gap: '20px'
-  },
-  featureCard: {
-    borderRadius: '24px',
-    background: '#111827',
-    border: '1px solid rgba(255,255,255,0.06)',
-    padding: '26px',
-    minHeight: '160px',
-    transition: 'transform 0.25s, box-shadow 0.25s',
-    cursor: 'pointer'
-  },
-  featureIcon: {
-    width: '46px',
-    height: '46px',
-    borderRadius: '16px',
-    display: 'grid',
-    placeItems: 'center',
-    background: 'rgba(249,115,22,0.16)',
-    color: '#f97316',
-    fontSize: '20px',
-    marginBottom: '18px'
-  },
-  featureTitle: {
-    fontSize: '18px',
-    fontWeight: 700,
-    color: '#fff',
-    marginBottom: '10px'
-  },
-  featureDesc: {
-    fontSize: '14px',
-    color: '#cbd5e1',
-    lineHeight: 1.75
-  },
-  forecastSection: {
-    display: 'grid',
-    gap: '24px',
-    background: '#020203',
-    padding: '32px',
-    borderRadius: '28px'
-  },
-  forecastHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    gap: '16px'
-  },
-  forecastTag: {
-    color: '#f97316',
-    fontSize: '12px',
-    textTransform: 'uppercase',
-    letterSpacing: '1.6px',
-    fontWeight: 700
-  },
-  forecastTitle: {
-    fontSize: '32px',
-    fontWeight: 800,
-    color: '#fff'
-  },
-  forecastDesc: {
-    color: '#94a3b8',
-    maxWidth: '660px',
-    lineHeight: 1.8,
-    marginTop: '8px'
-  },
-  forecastGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, minmax(0,1fr))',
-    gap: '18px'
-  },
-  forecastCard: {
-    borderRadius: '28px',
-    padding: '26px',
-    background: '#111827',
-    border: '1px solid rgba(255,255,255,0.06)'
-  },
-  forecastTagSmall: {
-    fontSize: '12px',
-    color: '#94a3b8',
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
-    marginBottom: '14px'
-  },
-  forecastValue: {
-    fontSize: '36px',
-    fontWeight: 800,
-    color: '#fff',
-    marginBottom: '10px'
-  },
-  forecastNote: {
-    fontSize: '13px',
-    color: '#cbd5e1',
-    lineHeight: 1.75
-  },
-  materialsSection: {
-    display: 'grid',
-    gap: '22px'
-  },
-  materialsHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    gap: '16px'
-  },
-  materialsTitle: {
-    fontSize: '28px',
-    fontWeight: 800,
-    color: '#020203'
-  },
-  materialsLink: {
-    fontSize: '13px',
-    fontWeight: 700,
-    color: '#f97316',
-    background: 'rgba(249,115,22,0.08)',
-    borderRadius: '18px',
-    padding: '10px 18px',
-    border: '1px solid rgba(249,115,22,0.18)',
-    cursor: 'pointer'
-  },
-  productGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, minmax(0,1fr))',
-    gap: '20px'
-  },
-  productCard: {
-    borderRadius: '30px',
-    overflow: 'hidden',
-    background: '#111827',
-    boxShadow: '0 24px 60px rgba(0,0,0,0.20)',
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  productImage: {
-    minHeight: '260px',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center'
-  },
-  productInfo: {
-    padding: '24px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '12px'
-  },
-  productName: {
-    fontSize: '17px',
-    fontWeight: 700,
-    color: '#fff'
-  },
-  productMeta: {
-    fontSize: '13px',
-    color: '#94a3b8'
-  },
-  productPrice: {
-    fontSize: '15px',
-    fontWeight: 700,
-    color: '#f97316'
-  },
-  ctaBanner: {
-    borderRadius: '32px',
-    background: '#020203',
-    border: '1px solid rgba(255,255,255,0.08)',
-    padding: '40px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '24px',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-    minHeight: '220px'
-  },
-  ctaBannerText: {
-    color: '#fff'
-  },
-  ctaBannerTitle: {
-    fontSize: '30px',
-    fontWeight: 800,
-    marginBottom: '14px'
-  },
-  ctaBannerDesc: {
-    color: '#cbd5e1',
-    lineHeight: 1.8
-  },
-  ctaBannerButtons: {
-    display: 'flex',
-    flexDirection: 'row',
-    gap: '20px',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  ctaPrimaryButton: {
-    background: '#c2410c',
-    color: '#fff',
-    border: 'none',
-    padding: '14px 30px',
-    borderRadius: '14px',
-    fontSize: '15px',
-    fontWeight: 700,
-    cursor: 'pointer',
-    boxShadow: '0 14px 34px rgba(194,65,12,0.20)'
-  },
-  ctaSecondaryButton: {
-    background: '#0f172a',
-    color: '#e6eef8',
-    border: '1px solid rgba(255,255,255,0.06)',
-    padding: '14px 30px',
-    borderRadius: '14px',
-    fontSize: '15px',
-    fontWeight: 700,
-    cursor: 'pointer'
-  },
-  footer: {
-    display: 'grid',
-    gridTemplateColumns: '1.4fr repeat(3, 1fr)',
-    gap: '30px',
-    padding: '36px 0',
-    borderTop: '1px solid rgba(255,255,255,0.08)'
-  },
-  footerBrand: {
-    color: '#f97316',
-    fontWeight: 800,
-    letterSpacing: '0.4px',
-    marginBottom: '18px'
-  },
-  footerText: {
-    color: '#475569',
-    fontSize: '14px',
-    fontWeight: 500,
-    lineHeight: 1.9
-  },
-  footerColumnTitle: {
-    color: '#020203',
-    fontWeight: 800,
-    fontSize: '15px',
-    marginBottom: '14px'
-  },
-  footerLink: {
-    color: '#475569',
-    fontSize: '14px',
-    fontWeight: 500,
-    lineHeight: 2,
-    cursor: 'pointer'
-  }
-};
-
+import { ShieldCheck, Hammer, Lock, BarChart3 } from 'lucide-react';
+import cementImg from '../assets/cement.png';
+import steelImg from '../assets/Steel.png';
+import brickImg from '../assets/brick.png';
+import './Landingpage.css';
+/** DATA **/
 const featureData = [
-  { icon: '🛡️', title: 'Verified Suppliers', desc: 'Every vendor is vetted through our detailed verification workflow.' },
-  { icon:'🔨'
-    , title: 'Bulk Bidding', desc: 'Place a request and let suppliers compete for your material order.' },
-  { icon: '🔒', title: 'Secure Payments', desc: 'Escrow-style fund release with instant invoice generation.' },
-  { icon: '📊', title: 'Real-time Analytics', desc: 'Track price shifts, demand signals, and supplier performance.' }
+  { icon: ShieldCheck, title: 'Verified Suppliers', desc: 'Every vendor is vetted through our detailed verification workflow.', color: 'white', theme: 'trust' },
+  { icon: Hammer, title: 'Bulk Bidding', desc: 'Place a request and let suppliers compete for your material order.', color: 'brand', theme: 'glass' },
+  { icon: Lock, title: 'Secure Payments', desc: 'Escrow-style fund release with instant invoice generation.', color: 'white', theme: 'security' },
+  { icon: BarChart3, title: 'Real-time Analytics', desc: 'Track price shifts, demand signals, and supplier performance.', color: 'obsidian', theme: 'glass' }
 ];
 
 const priceForecast = [
@@ -480,235 +20,246 @@ const priceForecast = [
 ];
 
 const materials = [
-  { title: 'OPC Cement', subtitle: 'Ordinary Portland Cement', price: 'PKR 1,240/bag', image: 'https://images.unsplash.com/photo-1581094078250-3b94d1a3009f?auto=format&fit=crop&w=900&q=80' },
-  { title: 'Grade 60 Steel', subtitle: 'Deformed Bars', price: 'PKR 265/kg', image: 'https://images.unsplash.com/photo-1596495577886-d920f5a68f08?auto=format&fit=crop&w=900&q=80' },
-  { title: 'Red Bricks', subtitle: 'First-Class A-Grade', price: 'PKR 18.5/1k', image: 'https://images.unsplash.com/photo-1504222490345-289bb1aff0d0?auto=format&fit=crop&w=900&q=80' }
+  { title: 'OPC Cement', subtitle: 'Ordinary Portland Cement', price: 'PKR 1,240/bag', image: cementImg },
+  { title: 'Grade 60 Steel', subtitle: 'Deformed Bars', price: 'PKR 265/kg', image: steelImg },
+  { title: 'Red Bricks', subtitle: 'First-Class A-Grade', price: 'PKR 18.5/1k', image: brickImg }
 ];
+
+/** SUB-COMPONENTS **/
+export const Logo = () => (
+  <div className="d-flex align-items-center gap-2">
+    <div className="logo-icon d-flex align-items-center justify-content-center fw-bold text-white shadow-sm">
+      C
+    </div>
+    <div className="fs-4 fs-md-3 mb-0 lh-1 ls-tight text-brand" style={{ fontWeight: 800 }}>ConMat</div>
+  </div>
+);
+
+const Navbar = ({ navigate, location }) => {
+  const links = [
+    { name: 'Home', path: '/' },
+    { name: 'Marketplace', path: '/marketplace' },
+    { name: 'Analytics', path: '/analytics' },
+    { name: 'Bidding', path: '/bidding' },
+  ];
+
+  return (
+    <nav className="sticky-top navbar-sticky border-bottom border-secondary border-opacity-10 py-2 py-md-3">
+      <div className="container-fluid px-3 px-md-4 position-relative">
+      {/* Main Row: Logo, Centered Nav (Desktop), and Actions */}
+      <div className="d-flex justify-content-between align-items-center">
+        {/* Left Side: Logo Wrapper */}
+        <div className="d-flex align-items-center" style={{ flexBasis: 0 }}>
+          <Logo />
+        </div>
+        
+        {/* Center Side: Nav Links (Desktop) */}
+        <div className="d-none d-md-flex gap-2 gap-lg-4 gap-xl-5 align-items-center justify-content-center position-absolute top-50 start-50 translate-middle">
+          {links.map((link) => {
+            const isActive = location.pathname === link.path;
+            return (
+              <button
+                key={link.path}
+                className={`btn btn-link text-decoration-none p-0 fs-6 ls-tight transition-all position-relative ${
+                  isActive ? 'text-brand' : 'text-dark'
+                }`}
+                style={{ fontWeight: 700 }}
+                onClick={() => navigate(link.path)}
+              >
+                {link.name}
+                {isActive && (
+                  <div 
+                    className="position-absolute start-0 w-100 bg-brand" 
+                    style={{ height: '3px', bottom: '-8px', borderRadius: '2px' }} 
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Right Side: Action Buttons Wrapper - Stacked on mobile with Sign Up on top */}
+        <div className="d-flex flex-column-reverse flex-md-row align-items-end align-items-md-center gap-1 gap-md-3 ms-auto" style={{ flexBasis: 0 }}>
+          <button className="btn btn-login-outline text-dark fw-extra-bold d-flex justify-content-center align-items-center btn-nav-action" onClick={() => navigate('/login')}>Login</button>
+          <button className="btn btn-orange-cta shadow-sm fw-extra-bold border-0 text-white d-flex justify-content-center align-items-center btn-nav-action" onClick={() => navigate('/register')}>Sign Up</button>
+        </div>
+      </div>
+
+      {/* Mobile Links Row */}
+      <div className="d-flex d-md-none justify-content-center gap-3 mt-2 pt-2 border-top border-secondary border-opacity-10">
+        {links.map((link) => {
+          const isActive = location.pathname === link.path;
+          return (
+            <button
+              key={link.path}
+              className={`btn btn-link text-decoration-none p-1 fs-7 ls-tight transition-all position-relative ${
+                isActive ? 'text-brand' : 'text-dark'
+              }`}
+              style={{ fontWeight: 700 }}
+              onClick={() => navigate(link.path)}
+            >
+              {link.name}
+              {isActive && (
+                <div className="position-absolute start-0 w-100 bg-brand" style={{ height: '2px', bottom: '-2px', borderRadius: '1px' }} />
+              )}
+            </button>
+          );
+        })}
+      </div>
+      </div>
+    </nav>
+  );
+};
+
+const FeaturesGrid = () => (
+  <div className="row row-cols-1 row-cols-md-2 g-4">
+    {featureData.map((item, index) => {
+      const isWhite = item.color === 'white';
+      const Icon = item.icon;
+      return (
+        <div key={item.title} className="col">
+          <div className={`card h-100 p-4 p-md-5 rounded-5 border-0 shadow-premium transition-all feature-card feature-card-${item.color} text-center text-md-start ${index === 1 ? 'feature-card-featured' : ''}`}>
+            <div className={`rounded-4 d-flex align-items-center justify-content-center mb-4 icon-box icon-box-${item.theme} shadow-theme mx-auto mx-md-0`}>
+              <Icon size={32} strokeWidth={2.5} />
+            </div>
+            <div className={`fw-extra-bold h4 mb-3 ls-tight ${isWhite ? 'text-dark' : 'text-white'}`}>{item.title}</div>
+            <div className={`${isWhite ? 'text-dark' : 'text-white'}`} style={{ fontSize: '1rem', lineHeight: '1.6' }}>{item.desc}</div>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+);
+
+const MaterialsSection = ({ materials, navigate }) => (
+  <section className="mt-5">
+    <div className="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-4 gap-2">
+      <div>
+        <h2 className="fw-extra-bold h3 mb-1 ls-tight text-dark">Materials</h2>
+        <p className="text-dark mb-0 small pe-md-5">Sourced from the nation&apos;s most reliable industrial plants, specifically graded for local terrain and climate.</p>
+      </div>
+      <button className="btn btn-sm fw-bold btn-marketplace text-uppercase ls-mid transition-all" onClick={() => navigate('/marketplace')}>View Marketplace</button>
+    </div>
+    <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+      {materials.map((item) => (
+        <div key={item.title} className="col">
+          <div className="card product-card border-0 shadow-lg rounded-5 h-100 overflow-hidden position-relative">
+            <div className="position-absolute top-0 start-0 w-100 h-100 opacity-40 material-image-layer" style={{ backgroundImage: `url(${item.image})` }} />
+            <div className="card-body p-4 z-1 position-relative d-flex flex-column justify-content-end material-card-overlay" style={{ minHeight: '260px' }}>
+              <h4 className="h6 fw-extra-bold text-white mb-1">{item.title}</h4>
+              <div className="small text-white-50 mb-3">{item.subtitle}</div>
+              <div className="text-brand fw-bold">{item.price}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+);
+
+const HeroSection = ({ navigate }) => (
+  <section className="py-5 text-center text-lg-start">
+      <h1 className="display-4 fw-extra-bold mb-3 lh-sm text-dark">
+        The <span className="text-brand" style={{ fontWeight: 800 }}>ConMat</span> Shift in <br />
+        Pakistan&apos;s Construction Industry
+      </h1>
+      <div className="badge-hero mb-4 mx-auto mx-lg-0">
+        THE FUTURE OF PROCUREMENT
+      </div>
+      <p className="text-dark fs-5 mb-5 lh-lg max-w-660 mx-auto mx-lg-0">
+        Predictive market trends based on industrial output and import data.
+      </p>
+      <div className="d-flex justify-content-center justify-content-lg-start">
+        <button 
+          className="btn btn-orange-cta px-4 px-md-5 py-3 fw-bold shadow-lg text-white w-100 w-md-auto" 
+          style={{ maxWidth: '320px', fontSize: '1.2rem' }} 
+          onClick={() => navigate('/register')}
+        >
+          Register Yourself
+        </button>
+      </div>
+  </section>
+);
+
+const ForecastSection = ({ data }) => (
+  <div className="p-4 rounded-4 bg-black-obsidian border border-white-08 shadow-lg">
+    <div className="mb-4 text-center">
+      <div className="text-orange text-uppercase fw-bold mb-2 small-8 ls-extra">Price Forecast Q4 2024</div>
+      <div className="h4 fw-extra-bold text-white mb-1 ls-tight">Predictive market trends based on industrial output and import data </div>
+      <div className="text-white-50 small">Industry indicators for Pakistan.</div>
+    </div>
+    <div className="row row-cols-1 row-cols-lg-3 g-4 text-center">
+      {data.map((item) => (
+        <div key={item.label} className="col">
+          <div className="p-4 h-100 rounded-5 bg-navy border border-white-08 forecast-card d-flex flex-column justify-content-center gap-1 transition-all">
+            <div>
+              <div className="text-white text-uppercase fw-extra-bold mb-2 small-8 ls-extra">{item.label}</div>
+              <div className="h2 fw-extra-bold mb-2 ls-tight text-gradient">{item.value}</div>
+            </div>
+            <div className="text-white small px-2">{item.note}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const CtaBanner = ({ navigate }) => (
+  <section className="mt-5 p-4 p-md-5 rounded-4 bg-black-obsidian text-center shadow-lg border border-white-08">
+    <div className="text-orange text-uppercase fw-bold mb-2 small-8 ls-extra">Join the Network</div>
+    <h2 className="fw-extra-bold text-white mb-3 ls-tight fs-2">Ready to rebuild the backbone of Pakistan?</h2>
+    <p className="text-white mb-4 lh-lg max-w-660 mx-auto">Join the digital infrastructure that powers the nation&apos;s progress. Transact in PKR with confidence.</p>
+    <div className="d-flex flex-wrap gap-3 mt-2 justify-content-center">
+      <button className="btn px-4 py-2 fw-bold shadow-md btn-orange-cta text-white" onClick={() => navigate('/register')}>Create Free Account</button>
+      <button className="btn px-4 py-2 fw-bold border border-white-08 btn-navy-cta text-white bg-navy" onClick={() => navigate('/login')}>Talk to an Expert</button>
+    </div>
+  </section>
+);
+
+const Footer = () => {
+  const columns = [
+    { title: 'Materials', links: ['Steel Grade 60', 'OPC Cement', 'Red Bricks', 'More Materials'] },
+    { title: 'Company', links: ['About Us', 'Privacy Policy', 'Terms'] },
+    { title: 'Resources', links: ['Price Trends', 'FAQ', 'Contact Us'] }
+  ];
+
+  return (
+    <footer className="landing-footer row gx-4 gy-4 gx-md-5 py-5 mt-5 border-top border-secondary border-opacity-10 justify-content-between align-items-start">
+      <div className="col-12 col-md-5 col-lg-4 mb-4 mb-md-0 text-start">
+        <div className="fs-5 fs-md-4 mb-3 d-inline-block text-gradient fw-extra-bold ls-tight">ConMat</div>
+        <p className="text-dark small-13 lh-lg mb-0 pe-md-3">Pakistan&apos;s premier industrial marketplace. Digitizing supply chains from the ground up.</p>
+      </div>
+      {columns.map((col) => (
+        <div key={col.title} className="col-6 col-md-3 col-lg-2 text-start">
+          <div className="fw-extra-bold text-dark mb-3 small text-uppercase ls-mid">{col.title}</div>
+          <div className="d-flex flex-column gap-2">
+            {col.links.map(l => <button key={l} className="btn btn-link text-dark p-0 text-start text-decoration-none small-13 hover-brand text-nowrap">{l}</button>)}
+          </div>
+        </div>
+      ))}
+      <div className="col-12 mt-5 pt-4 border-top border-secondary border-opacity-10 text-center text-dark small-13 fw-extra-bold">
+        © 2026 ConMat. All rights reserved <span className="ms-2">🇵🇰</span>
+      </div>
+    </footer>
+  );
+};
 
 const LandingPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [hoveredFeature, setHoveredFeature] = useState(null);
-  const [pressedButton, setPressedButton] = useState(null);
-  const [navHover, setNavHover] = useState(null);
 
   return (
-    <div style={S.page}>
-      <div style={S.container}>
-        <header style={S.nav}>
-          <div style={S.brand}>
-            <div style={{...S.footerBrand, marginBottom: 0}}>ConMat</div>
-          </div>
-          <div style={S.navLinks}>
-            <button
-              style={{...S.navLink, ...((location.pathname === '/marketplace' || navHover === '/marketplace') ? S.navLinkActive : {}), ...(pressedButton === '/marketplace' ? S.buttonPressed : {})}}
-              onClick={() => { navigate('/marketplace'); setNavHover(null); }}
-              onMouseDown={() => setPressedButton('/marketplace')}
-              onMouseUp={() => setPressedButton(null)}
-              onMouseEnter={() => setNavHover('/marketplace')}
-              onMouseLeave={() => { setNavHover(null); setPressedButton(null); }}
-              onFocus={() => setNavHover('/marketplace')}
-              onBlur={() => setNavHover(null)}
-              onTouchStart={() => setNavHover('/marketplace')}
-              onTouchEnd={() => setNavHover(null)}
-            >Marketplace</button>
-            <button
-              style={{...S.navLink, ...((location.pathname === '/analytics' || navHover === '/analytics') ? S.navLinkActive : {}), ...(pressedButton === '/analytics' ? S.buttonPressed : {})}}
-              onClick={() => { navigate('/analytics'); setNavHover(null); }}
-              onMouseDown={() => setPressedButton('/analytics')}
-              onMouseUp={() => setPressedButton(null)}
-              onMouseEnter={() => setNavHover('/analytics')}
-              onMouseLeave={() => { setNavHover(null); setPressedButton(null); }}
-              onFocus={() => setNavHover('/analytics')}
-              onBlur={() => setNavHover(null)}
-              onTouchStart={() => setNavHover('/analytics')}
-              onTouchEnd={() => setNavHover(null)}
-            >Analytics</button>
-            <button
-              style={{...S.navLink, ...((location.pathname === '/reports' || navHover === '/reports') ? S.navLinkActive : {}), ...(pressedButton === '/reports' ? S.buttonPressed : {})}}
-              onClick={() => { navigate('/reports'); setNavHover(null); }}
-              onMouseDown={() => setPressedButton('/reports')}
-              onMouseUp={() => setPressedButton(null)}
-              onMouseEnter={() => setNavHover('/reports')}
-              onMouseLeave={() => { setNavHover(null); setPressedButton(null); }}
-              onFocus={() => setNavHover('/reports')}
-              onBlur={() => setNavHover(null)}
-              onTouchStart={() => setNavHover('/reports')}
-              onTouchEnd={() => setNavHover(null)}
-            >Reports</button>
-          </div>
-          <div style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
-            <button style={S.iconButton} aria-label="Notifications">🔔</button>
-            <button style={S.iconButton} aria-label="Settings">⚙️</button>
-            <button
-              style={{...S.navButton, ...(pressedButton === '/register' ? S.buttonPressed : {})}}
-              onClick={() => navigate('/register')}
-              onMouseDown={() => setPressedButton('/register')}
-              onMouseUp={() => setPressedButton(null)}
-              onMouseLeave={() => setPressedButton(null)}
-            >Sign Up</button>
-          </div>
-        </header>
-
-        <section style={S.hero}>
-          <div style={S.heroIntro}>
-            <div style={S.heroBadge}>THE FUTURE OF PROCUREMENT</div>
-            <h1 style={S.heroTitle}>
-              The <span style={S.heroAccent}>ConMat</span><br />
-              Shift in Pakistan&apos;s<br />
-              Construction Industry
-            </h1>
-            <p style={S.heroText}>
-              Connecting verified suppliers, wholesalers, and retailers for a more transparent future.
-            </p>
-            <div style={S.heroCtas}>
-              <button
-                style={{...S.primaryButton, ...(pressedButton === 'start-sourcing' ? S.buttonPressed : {})}}
-                onClick={() => navigate('/marketplace')}
-                onMouseDown={() => setPressedButton('start-sourcing')}
-                onMouseUp={() => setPressedButton(null)}
-                onMouseLeave={() => setPressedButton(null)}
-              >Start Sourcing</button>
-              <button
-                style={{...S.secondaryButton, ...(pressedButton === 'register-supplier' ? S.buttonPressed : {})}}
-                onClick={() => navigate('/register')}
-                onMouseDown={() => setPressedButton('register-supplier')}
-                onMouseUp={() => setPressedButton(null)}
-                onMouseLeave={() => setPressedButton(null)}
-              >Register as Supplier</button>
-            </div>
-          </div>
-
-        </section>
-
-        <section style={S.featuresSection}>
-          {featureData.map((item, index) => {
-            const isWhite = item.title === 'Verified Suppliers' || item.title === 'Secure Payments';
-            const isOrange = item.title === 'Bulk Bidding';
-            const isAnalytic = item.title === 'Real-time Analytics';
-            return (
-              <div
-                key={item.title}
-                style={{
-                  ...S.featureCard,
-                  background: isWhite ? '#ffffff' : isOrange ? '#d97706' : isAnalytic ? '#1e3a8a' : '#0f172a',
-                  border: isWhite ? '1px solid rgba(15,23,42,0.08)' : isOrange ? '1px solid rgba(217,119,6,0.24)' : isAnalytic ? '1px solid rgba(255,255,255,0.06)' : '1px solid rgba(255,255,255,0.08)',
-                  transform: hoveredFeature === index ? 'translateY(-6px)' : 'none',
-                  boxShadow: hoveredFeature === index ? '0 26px 60px rgba(0,0,0,0.20)' : '0 0 0 rgba(0,0,0,0)'
-                }}
-                onMouseEnter={() => setHoveredFeature(index)}
-                onMouseLeave={() => setHoveredFeature(null)}
-              >
-                <div
-                  style={{
-                    ...S.featureIcon,
-                    background: isWhite ? '#fef3c7' : isOrange ? '#fbe7c6' : isAnalytic ? '#274be0' : '#1e3a8a',
-                    color: isWhite ? '#b45309' : isOrange ? '#b45309' : isAnalytic ? '#ffffff' : '#fff'
-                  }}
-                >
-                  {item.icon}
-                </div>
-                <div style={{ ...S.featureTitle, color: isWhite ? '#111827' : '#fff' }}>{item.title}</div>
-                <div style={{ ...S.featureDesc, color: isWhite ? '#475569' : isAnalytic ? '#dbeafe' : isOrange ? '#fff' : '#cbd5e1' }}>{item.desc}</div>
-              </div>
-            );
-          })}
-        </section>
-
-        <section style={S.forecastSection}>
-          <div style={S.forecastHeader}>
-            <div>
-              <div style={S.forecastTag}>Price Forecast Q4 2024</div>
-              <div style={S.forecastTitle}>Predictive market trends based on industrial output and import data.</div>
-              <div style={S.forecastDesc}>Industry indicators for steel, cement, and bricks in Pakistan.</div>
-            </div>
-          </div>
-          <div style={S.forecastGrid}>
-            {priceForecast.map((item) => (
-              <div key={item.label} style={S.forecastCard}>
-                <div style={S.forecastTagSmall}>{item.label}</div>
-                <div style={S.forecastValue}>{item.value}</div>
-                <div style={S.forecastNote}>{item.note}</div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section style={S.materialsSection}>
-          <div style={S.materialsHeader}>
-            <div>
-              <div style={S.materialsTitle}>Materials</div>
-              <div style={S.heroText}>Sourced from the nation&apos;s most reliable industrial plants, specifically graded for local terrain and climate.</div>
-            </div>
-            <button
-              style={{...S.materialsLink, ...(pressedButton === 'view-marketplace' ? S.buttonPressed : {})}}
-              onClick={() => navigate('/marketplace')}
-              onMouseDown={() => setPressedButton('view-marketplace')}
-              onMouseUp={() => setPressedButton(null)}
-              onMouseLeave={() => setPressedButton(null)}
-            >View Marketplace</button>
-          </div>
-          <div style={S.productGrid}>
-            {materials.map((item) => (
-              <div key={item.title} style={S.productCard}>
-                <div style={{ ...S.productImage, backgroundImage: `url(${item.image})` }} />
-                <div style={S.productInfo}>
-                  <div style={S.productName}>{item.title}</div>
-                  <div style={S.productMeta}>{item.subtitle}</div>
-                  <div style={S.productPrice}>{item.price}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section style={S.ctaBanner}>
-          <div style={S.ctaBannerText}>
-            <div style={S.ctaBannerTitle}>Ready to rebuild the backbone of Pakistan?</div>
-            <div style={S.ctaBannerDesc}>Join the digital infrastructure that powers the nation&apos;s progress. Transact in PKR with confidence.</div>
-          </div>
-          <div style={S.ctaBannerButtons}>
-            <button
-              style={{...S.ctaPrimaryButton, ...(pressedButton === 'create-account' ? S.buttonPressed : {})}}
-              onClick={() => navigate('/register')}
-              onMouseDown={() => setPressedButton('create-account')}
-              onMouseUp={() => setPressedButton(null)}
-              onMouseLeave={() => setPressedButton(null)}
-            >Create Free Account</button>
-            <button
-              style={{...S.ctaSecondaryButton, ...(pressedButton === 'talk-expert' ? S.buttonPressed : {})}}
-              onClick={() => navigate('/login')}
-              onMouseDown={() => setPressedButton('talk-expert')}
-              onMouseUp={() => setPressedButton(null)}
-              onMouseLeave={() => setPressedButton(null)}
-            >Talk to an Expert</button>
-          </div>
-        </section>
-
-        <footer style={S.footer}>
-          <div>
-            <div style={S.footerBrand}>ConMat</div>
-            <div style={S.footerText}>Pakistan&apos;s premier industrial procurement marketplace. Digitizing supply chains from the ground up.</div>
-          </div>
-          <div>
-            <div style={S.footerColumnTitle}>Materials</div>
-            <div style={S.footerLink}>Steel Grade 60</div>
-            <div style={S.footerLink}>OPC Cement</div>
-            <div style={S.footerLink}>Red Bricks</div>
-          </div>
-          <div>
-            <div style={S.footerColumnTitle}>Company</div>
-            <div style={S.footerLink}>About Us</div>
-            <div style={S.footerLink}>Privacy Policy</div>
-            <div style={S.footerLink}>Terms of Service</div>
-          </div>
-          <div>
-            <div style={S.footerColumnTitle}>Resources</div>
-            <div style={S.footerLink}>Price Trends</div>
-            <div style={S.footerLink}>Supplier FAQ</div>
-            <div style={S.footerLink}>Contact Us</div>
-          </div>
-        </footer>
+    <div className="landing-page min-vh-100">
+      <Navbar navigate={navigate} location={location} />
+      <div className="app-container px-3 px-md-4">
+        <HeroSection navigate={navigate} />
+        <FeaturesGrid />
+        <div className="my-5">
+          <ForecastSection data={priceForecast} />
+        </div>
+        <MaterialsSection materials={materials} navigate={navigate} />
+        <CtaBanner navigate={navigate} />
+        <Footer />
       </div>
     </div>
   );

@@ -1,7 +1,3 @@
-// ============================================================
-//  models/Order.js  (Hafiz Abdul Rehman – 077011)
-//  Day 3 – Order model stored in orders_db
-// ============================================================
 const { DataTypes } = require('sequelize');
 const ordersDB = require('../config/db.orders');
 

@@ -1,0 +1,112 @@
+{
+  "info": {
+    "name": "ConMat Day 6 - Product Pricing and Comparison",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api"
+    },
+    {
+      "key": "token",
+      "value": "PASTE_JWT_TOKEN"
+    },
+    {
+      "key": "productId",
+      "value": "PASTE_PRODUCT_ID"
+    },
+    {
+      "key": "slabId",
+      "value": "PASTE_SLAB_ID"
+    }
+  ],
+  "item": [
+    {
+      "name": "Compare Products by Category",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/pricing/products/compare?category=Cement&city=Gujranwala&quantity=500"
+      }
+    },
+    {
+      "name": "Calculate Product Price",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"productId\": \"{{productId}}\",\n  \"quantity\": 500\n}"
+        },
+        "url": "{{baseUrl}}/pricing/calculate"
+      }
+    },
+    {
+      "name": "Get Product Pricing Slabs",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/pricing/products/{{productId}}/slabs"
+      }
+    },
+    {
+      "name": "Create Pricing Slab",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"label\": \"Bulk contract\",\n  \"minQty\": 500,\n  \"maxQty\": null,\n  \"unitPrice\": 1245\n}"
+        },
+        "url": "{{baseUrl}}/pricing/products/{{productId}}/slabs"
+      }
+    },
+    {
+      "name": "Update Pricing Slab",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"unitPrice\": 1238\n}"
+        },
+        "url": "{{baseUrl}}/pricing/slabs/{{slabId}}"
+      }
+    },
+    {
+      "name": "Deactivate Pricing Slab",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/pricing/slabs/{{slabId}}"
+      }
+    }
+  ]
+}

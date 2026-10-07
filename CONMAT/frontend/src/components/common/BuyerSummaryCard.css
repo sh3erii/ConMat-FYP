@@ -1,0 +1,70 @@
+.buyer-summary-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 22px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 18px 35px rgba(15, 23, 42, 0.07);
+}
+
+.buyer-summary-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: #ffffff;
+  background: #1c2333;
+}
+
+.buyer-summary-card p {
+  margin: 0 0 6px;
+  color: #6b7280;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.buyer-summary-card h3 {
+  margin: 0;
+  font-size: 26px;
+  color: #111827;
+}
+
+.buyer-summary-card span {
+  display: inline-block;
+  margin-top: 6px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.buyer-summary-card--blue .buyer-summary-card__icon {
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+}
+
+.buyer-summary-card--green .buyer-summary-card__icon {
+  background: linear-gradient(135deg, #059669, #16a34a);
+}
+
+.buyer-summary-card--orange .buyer-summary-card__icon {
+  background: linear-gradient(135deg, #b45309, #f97316);
+}
+
+.buyer-summary-card--purple .buyer-summary-card__icon {
+  background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+}
+
+@media (max-width: 560px) {
+  .buyer-summary-card {
+    padding: 16px;
+  }
+
+  .buyer-summary-card h3 {
+    font-size: 22px;
+  }
+}

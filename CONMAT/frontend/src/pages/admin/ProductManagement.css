@@ -1,0 +1,208 @@
+.product-management-page {
+  min-height: 100vh;
+  background: var(--conmat-surface);
+  padding: 32px;
+  font-family: Inter, "Plus Jakarta Sans", system-ui, sans-serif;
+  color: #0f172a;
+}
+
+.product-management-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: stretch;
+  background: linear-gradient(135deg, #1c2333, #0f172a);
+  color: #ffffff;
+  border-radius: 30px;
+  padding: 34px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+}
+
+.product-management-kicker {
+ display: inline-flex;
+  width: fit-content;
+
+  padding: 7px 12px;
+  margin: 0 0 16px;
+
+  border: 1px solid rgba(249, 115, 22, .25);
+  border-radius: 999px;
+ background: rgba(249, 115, 22, 0.12);
+  color: #f97316;
+
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.product-management-hero .workspace-hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+}
+
+.product-management-hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.05em;
+}
+
+.product-management-hero p {
+  max-width: 760px;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.75;
+  margin: 16px 0 0;
+}
+
+.product-management-hero-card {
+  min-width: 200px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  border-radius: 24px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.product-management-hero-card svg {
+  color: #f97316;
+  font-size: 2rem;
+}
+
+.product-management-hero-card strong {
+  font-size: 2.6rem;
+  font-weight: 950;
+}
+
+.product-management-hero-card span {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 800;
+}
+
+.product-management-stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+  margin: 24px 0;
+}
+
+.product-management-stats button {
+  text-align: left;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 22px;
+  cursor: pointer;
+  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.06);
+  transition: 0.2s ease;
+}
+
+.product-management-stats button:hover {
+  transform: translateY(-4px);
+}
+
+.product-management-stats svg {
+  color: #b45309;
+  font-size: 1.4rem;
+}
+
+.product-management-stats span {
+  display: block;
+  color: #64748b;
+  margin: 12px 0 4px;
+  font-weight: 800;
+}
+
+.product-management-stats strong {
+  font-size: 2rem;
+  color: #0f172a;
+}
+
+.product-management-panel {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid #e2e8f0;
+  border-radius: 30px;
+  padding: 22px;
+  box-shadow: 0 24px 55px rgba(15, 23, 42, 0.08);
+}
+
+.product-management-toolbar {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.product-management-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 0 14px;
+}
+
+.product-management-search svg {
+  color: #b45309;
+}
+
+.product-management-search input,
+.product-management-toolbar select {
+  border: none;
+  outline: none;
+  background: transparent;
+  min-height: 48px;
+  font-weight: 800;
+  color: #475569;
+}
+
+.product-management-search input {
+  width: 100%;
+}
+
+.product-management-toolbar select {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 0 14px;
+}
+
+.product-management-filters {
+  margin-bottom: 18px;
+}
+
+.product-management-notice,
+.product-management-loading {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #b45309;
+  font-weight: 900;
+  border-radius: 16px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+
+.product-management-loading {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-color: #bfdbfe;
+}
+
+@media (max-width: 900px) {
+  .product-management-page { padding: 18px; }
+  .product-management-hero { flex-direction: column; padding: 24px; }
+  .product-management-stats { grid-template-columns: repeat(2, 1fr); }
+  .product-management-toolbar { flex-direction: column; align-items: stretch; }
+}
+
+@media (max-width: 560px) {
+  .product-management-stats { grid-template-columns: 1fr; }
+}

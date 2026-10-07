@@ -1,0 +1,72 @@
+.protected-route-state {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--conmat-surface);
+  padding: 40px 18px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.protected-route-card {
+  width: min(520px, 100%);
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 28px;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+  padding: 34px;
+  text-align: center;
+}
+
+.protected-route-card--blocked {
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.protected-route-badge {
+  display: inline-flex;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(249, 115, 22, 0.12);
+  color: var(--conmat-orange);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.protected-route-badge--blocked {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.protected-route-card h2 {
+  margin: 18px 0 10px;
+  color: var(--conmat-navy);
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.protected-route-card p {
+  margin: 0 auto 24px;
+  color: var(--conmat-slate-500);
+  line-height: 1.7;
+  max-width: 420px;
+}
+
+.protected-route-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 22px;
+  border-radius: 14px;
+  background: var(--conmat-primary-action);
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.protected-route-btn--dark {
+  background: var(--conmat-navy);
+}

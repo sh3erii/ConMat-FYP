@@ -1,0 +1,74 @@
+.bid-participation-denied-page {
+  display: grid;
+  min-height: calc(100vh - 90px);
+  padding: 48px 32px;
+  place-items: center;
+  background: #f6f7fb;
+}
+
+.bid-participation-denied-card {
+  width: min(680px, 100%);
+  padding: 42px;
+  border: 1px solid #e2e8f0;
+  border-radius: 28px;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.09);
+}
+
+.bid-participation-denied-card__icon {
+  display: grid;
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 18px;
+  border-radius: 20px;
+  place-items: center;
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.bid-participation-denied-card__eyebrow {
+  color: #ea580c;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.bid-participation-denied-card h1 {
+  margin: 12px 0;
+  color: #172033;
+  font-size: clamp(1.75rem, 4vw, 2.65rem);
+  line-height: 1.12;
+}
+
+.bid-participation-denied-card p {
+  max-width: 540px;
+  margin: 0 auto 26px;
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.bid-participation-denied-card a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 11px 18px;
+  border-radius: 13px;
+  background: #f97316;
+  color: #ffffff;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+@media (max-width: 575px) {
+  .bid-participation-denied-page {
+    padding: 28px 16px;
+  }
+
+  .bid-participation-denied-card {
+    padding: 30px 20px;
+  }
+}

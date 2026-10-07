@@ -1,0 +1,107 @@
+.payment-summary-panel {
+  background: var(--conmat-white);
+  border: 1px solid var(--conmat-border);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: var(--conmat-shadow-sm);
+}
+
+.payment-summary-panel__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.payment-summary-panel__head span {
+  color: var(--conmat-slate-500);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.payment-summary-panel__head strong {
+  color: var(--conmat-navy);
+  text-align: right;
+}
+
+.payment-summary-panel__items {
+  display: grid;
+  gap: 12px;
+  padding: 16px 0;
+  border-top: 1px solid var(--conmat-border);
+  border-bottom: 1px solid var(--conmat-border);
+}
+
+.payment-summary-panel__item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.payment-summary-panel__item strong,
+.payment-summary-panel__item span {
+  display: block;
+}
+
+.payment-summary-panel__item strong {
+  color: var(--conmat-slate-900);
+}
+
+.payment-summary-panel__item span {
+  margin-top: 4px;
+  color: var(--conmat-slate-500);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.payment-summary-panel__item b {
+  flex: 0 0 auto;
+  color: var(--conmat-orange-dark);
+}
+
+.payment-summary-panel__totals {
+  display: grid;
+  gap: 10px;
+  padding-top: 16px;
+}
+
+.payment-summary-panel__totals p {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0;
+  color: var(--conmat-slate-500);
+  font-weight: 800;
+}
+
+.payment-summary-panel__totals b {
+  color: var(--conmat-slate-900);
+}
+
+.payment-summary-panel__grand {
+  margin-top: 4px !important;
+  padding-top: 14px;
+  border-top: 1px solid var(--conmat-border);
+  color: var(--conmat-navy) !important;
+  font-size: 1.05rem;
+}
+
+.payment-summary-panel__grand b {
+  color: var(--conmat-orange-dark);
+  font-size: 1.12rem;
+}
+
+.payment-summary-panel__payout-note {
+  margin: 16px 0 0;
+  padding: 13px 14px;
+  border-radius: 14px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.55;
+}

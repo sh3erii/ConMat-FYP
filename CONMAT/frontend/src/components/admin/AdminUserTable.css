@@ -1,0 +1,147 @@
+.admin-user-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-user-table {
+  border-collapse: collapse;
+  min-width: 880px;
+  width: 100%;
+}
+
+.admin-user-table th {
+  background: #f8fafc;
+  color: #475569;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  padding: 14px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.admin-user-table td {
+  border-top: 1px solid #e5e7eb;
+  color: #475569;
+  font-weight: 700;
+  padding: 16px 14px;
+  vertical-align: middle;
+}
+
+.admin-user-table td strong {
+  color: #111827;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.admin-user-table td span {
+  color: #64748b;
+  display: block;
+  font-size: 0.85rem;
+}
+
+.user-status {
+  border-radius: 999px;
+  display: inline-block;
+  font-style: normal;
+  font-weight: 900;
+  padding: 7px 10px;
+}
+
+.user-status--active {
+  background: #dcfce7;
+  color: #047857;
+}
+
+.user-status--pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.user-status--rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.admin-user-documents-button {
+  display: inline-flex;
+  margin-top: 7px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #c2410c;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.admin-user-documents-button:hover,
+.admin-user-documents-button:focus-visible {
+  color: #9a3412;
+}
+
+.admin-user-documents-button:focus-visible {
+  border-radius: 4px;
+  outline: 3px solid rgba(249, 115, 22, 0.2);
+  outline-offset: 3px;
+}
+
+.user-verification-status {
+  display: block;
+  margin-top: 6px;
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.admin-user-action-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%2364748b' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+
+  color: #334155;
+  cursor: pointer;
+
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+
+  padding: 9px 32px 9px 12px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.admin-user-action-select:hover {
+  border-color: #f97316;
+}
+
+.admin-user-action-select:focus {
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
+}
+
+.admin-user-action-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.admin-user-action-select option {
+  background: #ffffff;
+  color: #111827;
+  font-weight: 700;
+}

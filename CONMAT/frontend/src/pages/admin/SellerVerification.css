@@ -1,0 +1,93 @@
+.seller-verification-page {
+  background: #f6f7fb;
+  min-height: 100vh;
+  padding: 32px;
+}
+.seller-verification-hero {
+  background: #1c2333;
+  border-radius: 30px;
+  color: #ffffff;
+  margin-bottom: 20px;
+  padding: 34px;
+}
+.seller-verification-hero span {
+  display: inline-flex;
+  width: fit-content;
+
+  padding: 7px 12px;
+  margin-bottom: 14px;
+
+  border: 1px solid rgba(249, 115, 22, .25);
+  border-radius: 999px;
+ background: rgba(249, 115, 22, 0.12);
+  color: #f97316;
+
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.seller-verification-hero h1 {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.05;
+  margin: 10px 0 12px;
+}
+.seller-verification-hero p {
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 760px;
+}
+.seller-verification-notice {
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+  border-radius: 18px;
+  color: #047857;
+  font-weight: 900;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+}
+.seller-verification-toolbar {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 22px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1fr);
+  margin-bottom: 22px;
+  padding: 16px;
+}
+.seller-verification-toolbar input {
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  color: #111827;
+  font-weight: 800;
+  outline: none;
+  padding: 13px 14px;
+}
+.seller-verification-toolbar input:focus {
+  border-color: #b45309;
+  box-shadow: 0 0 0 4px rgba(180, 83, 9, 0.12);
+}
+.seller-verification-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.seller-verification-empty {
+  background: #ffffff;
+  border: 1px dashed #cbd5e1;
+  border-radius: 22px;
+  color: #64748b;
+  font-weight: 900;
+  padding: 34px;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .seller-verification-grid,
+  .seller-verification-toolbar { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .seller-verification-page { padding: 18px; }
+}

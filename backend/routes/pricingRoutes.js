@@ -1,0 +1,1 @@
+const r=require('express').Router(),c=require('../controllers/pricingController'),p=require('../middleware/authMiddleware');r.get('/products/compare',p,c.compare);r.post('/calculate',p,c.calculate);module.exports=r;

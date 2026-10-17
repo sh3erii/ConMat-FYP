@@ -1,0 +1,427 @@
+.settings-page {
+  min-height: 100vh;
+  background: var(--conmat-surface);
+  padding: 32px;
+  color: #0f172a;
+  font-family: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.settings-page__hero {
+  border-radius: 30px;
+  padding: 34px;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #0f172a, #1c2333);
+  color: #fff;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2);
+}
+
+.setting-eyebrow p {
+ display: inline-flex;
+  width: fit-content;
+
+  padding: 7px 12px;
+  margin-bottom: 14px;
+
+  border: 1px solid rgba(249, 115, 22, .25);
+  border-radius: 999px;
+ background: rgba(249, 115, 22, 0.12);
+  color: #f97316;
+
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.setting_eyebrow p {
+  margin: 0;
+}
+.settings-page__hero h1 {
+  margin: 0 0 8px;
+  font-size: clamp(34px, 5vw, 56px);
+  font-weight: 950;
+  letter-spacing: -0.04em;
+}
+
+.settings-page__hero span {
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 700;
+}
+
+.settings-page__message {
+  margin-bottom: 18px;
+  padding: 14px 18px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 0.93rem;
+}
+
+.settings-page__message--error {
+  background: #fff1f2;
+  color: #be123c;
+  border: 1.5px solid rgba(190, 18, 60, 0.18);
+}
+
+.settings-page__message--success {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1.5px solid rgba(21, 128, 61, 0.18);
+}
+
+.settings-page__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.settings-card {
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 26px;
+  padding: 24px;
+  display: grid;
+  gap: 16px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+}
+
+.settings-card__head {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.settings-card__head > svg {
+  width: 44px;
+  height: 44px;
+  padding: 12px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f97316, #b45309);
+  color: #fff;
+}
+
+.settings-card h2 {
+  margin: 0 0 4px;
+  font-weight: 950;
+}
+
+.settings-card p {
+  margin: 0;
+  color: #64748b;
+  font-weight: 650;
+}
+
+.settings-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 14px;
+  border-radius: 16px;
+  background: #f8fafc;
+  color: #334155;
+  font-weight: 900;
+}
+
+.settings-toggle input {
+  width: 20px;
+  height: 20px;
+  accent-color: #f97316;
+}
+
+.settings-card label:not(.settings-toggle) {
+  display: grid;
+  gap: 8px;
+  color: #334155;
+  font-weight: 900;
+}
+
+.settings-payout-form input[type='text'],
+.settings-payout-form select {
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 13px 14px;
+  outline: none;
+  color: #0f172a;
+  font: inherit;
+  background: #f8fafc;
+}
+
+.settings-payout-form input[type='text']:focus,
+.settings-payout-form select:focus {
+  border-color: #f97316;
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12);
+}
+
+.settings-password-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 50px;
+  padding: 0 10px 0 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #f8fafc;
+}
+
+.settings-password-field:focus-within {
+  border-color: #f97316;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12);
+}
+
+.settings-password-field input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #0f172a;
+  font: inherit;
+}
+
+.settings-card .settings-password-field .password-visibility-toggle {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #64748b;
+}
+
+.settings-card .settings-password-field .password-visibility-toggle:hover {
+  background: rgba(15, 23, 42, 0.06);
+  color: #334155;
+}
+
+.settings-card button {
+  width: fit-content;
+  border: none;
+  border-radius: 16px;
+  padding: 13px 18px;
+  background: #0f172a;
+  color: #fff;
+  font-weight: 950;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.settings-card .settings-action-button {
+  width: fit-content;
+  min-width: 0;
+  min-height: 0;
+  padding: 13px 18px;
+  border-radius: 16px;
+  justify-content: center;
+  font-size: 0.86rem;
+  line-height: 1.4;
+  transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease;
+}
+
+.settings-card .settings-action-button:not(:disabled):hover {
+  transform: translateY(-2px);
+}
+
+.settings-card button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.settings-action-button svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+.settings-payout-status {
+  display: grid;
+  gap: 5px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid #fed7aa;
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.settings-payout-card {
+  grid-column: 1 / -1;
+}
+
+.settings-payout-status--ready {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: #166534;
+}
+
+.settings-payout-status span,
+.settings-payout-note {
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.settings-payout-details {
+  display: grid;
+  gap: 10px;
+}
+
+.settings-payout-details p {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #f8fafc;
+  font-size: 0.88rem;
+}
+
+.settings-payout-details strong {
+  color: #0f172a;
+  text-align: right;
+}
+
+.settings-payout-note {
+  color: #64748b;
+}
+
+.settings-payout-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.settings-payout-method {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #f8fafc;
+}
+
+.settings-payout-method > svg {
+  width: 38px;
+  height: 38px;
+  padding: 9px;
+  border-radius: 12px;
+  color: #c2410c;
+  background: #ffedd5;
+}
+
+.settings-payout-method > div:not(.settings-payout-method__actions) {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.settings-payout-method strong,
+.settings-payout-method span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.settings-payout-method span {
+  color: #64748b;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.settings-payout-method__actions {
+  display: flex;
+  gap: 6px;
+}
+
+.settings-card .settings-icon-button {
+  width: 34px;
+  height: 34px;
+  padding: 8px;
+  justify-content: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #fff;
+  color: #475569;
+}
+
+.settings-card .settings-icon-button--danger {
+  color: #be123c;
+  border-color: #fecdd3;
+}
+
+.settings-icon-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.settings-payout-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: #fff;
+}
+
+.settings-payout-form__full,
+.settings-payout-form > button {
+  grid-column: 1 / -1;
+}
+
+.settings-payout-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.settings-card .settings-payout-secondary {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #334155;
+}
+
+.settings-payout-spinner,
+.settings-button-spinner {
+  animation: settings-payout-spin 0.8s linear infinite;
+}
+
+@keyframes settings-payout-spin {
+  to { transform: rotate(360deg); }
+}
+.settings-page__back-btn {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: background-color 0.2s ease;
+}
+
+.settings-page__back-btn:hover {
+}
+
+
+@media (max-width: 860px) {
+  .settings-page__grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .settings-page { padding: 18px; }
+  .settings-payout-form { grid-template-columns: 1fr; }
+  .settings-payout-form > label,
+  .settings-payout-form > button { grid-column: 1; }
+}
+.settings-page__back-btn {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: background-color 0.2s ease;
+}
+
+.settings-page__back-btn:hover {
+}

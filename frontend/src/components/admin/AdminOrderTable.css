@@ -1,0 +1,141 @@
+.admin-order-table-wrap {
+  display: grid;
+  gap: 14px;
+}
+
+.admin-order-table-head,
+.admin-order-row {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1.1fr 0.8fr 0.8fr 0.9fr 0.9fr 0.9fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.admin-order-table-head {
+  padding: 0 18px;
+  color: #64748b;
+  font-weight: 900;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.admin-order-row {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  padding: 18px;
+  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.06);
+}
+
+.admin-order-number strong,
+.admin-order-party strong,
+.admin-order-amount {
+  display: block;
+  color: #0f172a;
+  font-weight: 900;
+}
+
+.admin-order-number span,
+.admin-order-party span {
+  display: block;
+  color: #64748b;
+  font-size: 0.86rem;
+  margin-top: 4px;
+}
+
+.admin-order-payment,
+.admin-order-status {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.admin-order-status {
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  background: #f0fdf4;
+  color: #166534;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.admin-order-status--cancelled,
+.admin-order-status--payment-issue {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.admin-order-payment--paid {
+  background: #dcfce7;
+  color: #047857;
+}
+
+.admin-order-payment--pending {
+  background: #ffedd5;
+  color: #b45309;
+}
+
+.admin-order-payment--failed {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.admin-order-payment--refunded {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+
+.admin-order-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-order-actions button {
+  border: 1px solid transparent;
+  background: var(--conmat-primary-action);
+  border-radius: 12px;
+  padding: 9px 10px;
+  font-weight: 900;
+  color: var(--conmat-primary-action-text);
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-order-empty {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border: 1px dashed #cbd5e1;
+  border-radius: 24px;
+  color: #64748b;
+}
+
+.admin-order-empty svg {
+  font-size: 2.4rem;
+  color: #b45309;
+}
+
+.admin-order-empty h3 {
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 1180px) {
+  .admin-order-table-head {
+    display: none;
+  }
+
+  .admin-order-row {
+    grid-template-columns: 1fr;
+  }
+}

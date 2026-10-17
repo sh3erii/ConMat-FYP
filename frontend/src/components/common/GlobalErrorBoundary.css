@@ -1,0 +1,48 @@
+.global-error-boundary {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: #f8fafc;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.global-error-card {
+  width: min(520px, 100%);
+  background: #fff;
+  border-radius: 26px;
+  padding: 34px;
+  text-align: center;
+  border: 1px solid rgba(239, 68, 68, 0.18);
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
+}
+
+.global-error-card span {
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.global-error-card h2 {
+  color: #0f172a;
+  margin: 14px 0 10px;
+  font-weight: 900;
+}
+
+.global-error-card p {
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.global-error-card button {
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 20px;
+  background: #0f172a;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}

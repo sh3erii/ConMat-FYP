@@ -1,0 +1,29 @@
+.status-filter-tabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.status-filter-tab {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #475569;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 800;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.status-filter-tab:hover {
+  transform: translateY(-1px);
+}
+
+.status-filter-tab--active {
+  background: var(--conmat-primary-action);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 12px 24px rgba(180, 83, 9, 0.22);
+}

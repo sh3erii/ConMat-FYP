@@ -1,0 +1,25 @@
+{
+  "name": "conmat",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently -n backend,frontend \"npm run dev:neon --workspace backend\" \"npm run dev --workspace frontend\"",
+    "dev:neon": "concurrently -n backend,frontend \"npm run dev:neon --workspace backend\" \"npm run dev --workspace frontend\"",
+    "dev:local": "node scripts/dev-local.js",
+    "dev:local:services": "concurrently -n backend,frontend \"npm run dev:local --workspace backend\" \"npm run dev --workspace frontend\"",
+    "close:local": "npm run db:local:stop --workspace backend",
+    "dev:backend": "npm run dev --workspace backend",
+    "dev:frontend": "npm run dev --workspace frontend",
+    "build": "npm run build --workspace frontend",
+    "lint": "npm run lint --workspace frontend",
+    "check": "npm run audit:frontend --workspace frontend && npm run check:all --workspace backend && npm run lint --workspace frontend && npm run build --workspace frontend",
+    "db:check": "npm run db:check --workspace backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

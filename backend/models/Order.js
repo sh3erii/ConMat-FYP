@@ -1,0 +1,36 @@
+const { DataTypes } = require('sequelize');
+const { ordersDB } = require('../config/database');
+module.exports = ordersDB.define('Order', {
+  id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
+  orderNumber: { type: DataTypes.STRING(48), allowNull: false, unique: true },
+  checkoutToken: { type: DataTypes.STRING(80), allowNull: true, unique: true },
+  buyerId: { type: DataTypes.UUID, allowNull: false },
+  buyerRole: { type: DataTypes.ENUM('Customer','Retailer','Wholesaler','Supplier','Admin'), allowNull: false },
+  buyerName: { type: DataTypes.STRING(120), allowNull: true },
+  city: { type: DataTypes.STRING(100), allowNull: true },
+  subtotal: { type: DataTypes.DECIMAL(12,2), allowNull: false, defaultValue: 0 },
+  shippingFee: { type: DataTypes.DECIMAL(12,2), allowNull: false, defaultValue: 0 },
+  taxAmount: { type: DataTypes.DECIMAL(12,2), allowNull: false, defaultValue: 0 },
+  discount: { type: DataTypes.DECIMAL(12,2), allowNull: false, defaultValue: 0 },
+  totalAmount: { type: DataTypes.DECIMAL(12,2), allowNull: false, defaultValue: 0 },
+  status: { type: DataTypes.ENUM('Pending','Paid','Cancelled'), allowNull: false, defaultValue: 'Pending' },
+  orderStatus: { type: DataTypes.ENUM('Placed','Confirmed','Processing','Packed','Dispatched','Delivered','Payment Issue','Cancelled'), allowNull: false, defaultValue: 'Placed' },
+  paymentStatus: { type: DataTypes.ENUM('Pending','Paid','Failed','Refunded'), allowNull: false, defaultValue: 'Pending' },
+  paymentId: { type: DataTypes.UUID, allowNull: true },
+  paymentMethod: { type: DataTypes.STRING(60), allowNull: true },
+  shippingAddress: { type: DataTypes.TEXT, allowNull: false },
+  contactPhone: { type: DataTypes.STRING(40), allowNull: false },
+  deliveryWindow: { type: DataTypes.STRING(80), allowNull: true },
+  notes: { type: DataTypes.TEXT, allowNull: true },
+  sourceBidOfferId: { type: DataTypes.UUID, allowNull: true },
+  inventoryReserved: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
+  stockRestoredAt: { type: DataTypes.DATE, allowNull: true },
+  deliveredAt: { type: DataTypes.DATE, allowNull: true },
+  deliveryResponseDeadline: { type: DataTypes.DATE, allowNull: true },
+  deliveryResolution: {
+    type: DataTypes.STRING(32),
+    allowNull: true,
+    validate: { isIn: [['AwaitingBuyer','ReleaseProcessing','BuyerConfirmed','IssueReported','AutoConfirmed','ReleaseFailed']] },
+  },
+  cancelledAt: { type: DataTypes.DATE, allowNull: true }
+}, { tableName: 'orders', timestamps: true, indexes: [{ fields: ['buyerId'] },{ unique: true, fields: ['checkoutToken'] },{ fields: ['orderNumber'] },{ fields: ['orderStatus'] },{ fields: ['paymentStatus'] }] });

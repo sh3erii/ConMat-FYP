@@ -1,0 +1,44 @@
+.admin-stat-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.07);
+  display: flex;
+  flex-direction: column;
+  min-height: 150px;
+  padding: 22px;
+}
+
+.admin-stat-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+}
+.admin-stat-card span {
+  color: #b45309;
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.admin-stat-card strong {
+  color: #111827;
+  display: block;
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  line-height: 1.15;
+  margin: 14px 0 10px;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.admin-stat-card small {
+  color: #6b7280;
+  font-weight: 700;
+}
+@media (max-width: 640px) {
+  .admin-stat-card { min-height: auto; }
+}

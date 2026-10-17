@@ -1,0 +1,8 @@
+.customer-invoices-state {
+  padding: 18px 20px;
+  border: 1px solid rgba(249, 115, 22, 0.28);
+  border-radius: 14px;
+  background: #fff7ed;
+  color: #9a3412;
+  font-weight: 700;
+}

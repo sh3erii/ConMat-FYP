@@ -1,0 +1,1 @@
+const r=require('express').Router(),c=require('../controllers/notificationController'),p=require('../middleware/authMiddleware');r.use(p);r.get('/me',c.getPrefs);r.put('/me',c.updatePrefs);module.exports=r;

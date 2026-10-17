@@ -1,0 +1,1 @@
+const r=require('express').Router(),c=require('../controllers/adminController'),p=require('../middleware/authMiddleware'),role=require('../middleware/roleMiddleware');r.get('/low-stock-alerts',p,role('Admin'),c.lowStock);module.exports=r;

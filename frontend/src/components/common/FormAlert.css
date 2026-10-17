@@ -1,0 +1,27 @@
+.form-alert {
+  border-radius: 16px;
+  padding: 13px 15px;
+  font-weight: 800;
+  line-height: 1.45;
+  font-size: 0.92rem;
+  border: 1px solid transparent;
+  margin-bottom: 16px;
+}
+
+.form-alert--success {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #a7f3d0;
+}
+
+.form-alert--error {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+.form-alert--info {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-color: #bfdbfe;
+}

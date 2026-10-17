@@ -1,0 +1,53 @@
+{
+  "name": "conmat-backend",
+  "version": "2.0.0",
+  "private": true,
+  "description": "ConMat unified backend API",
+  "main": "server.js",
+  "scripts": {
+    "db:local:start": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/local-db.ps1 start",
+    "db:local:stop": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/local-db.ps1 stop",
+    "db:local:status": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/local-db.ps1 status",
+    "db:local:ensure": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/local-db.ps1 ensure",
+    "start": "node scripts/run-with-env.js neon",
+    "start:neon": "node scripts/run-with-env.js neon",
+    "prestart:local": "npm run db:local:ensure",
+    "start:local": "node scripts/run-with-env.js local",
+    "dev": "nodemon --exec \"node scripts/run-with-env.js neon\"",
+    "dev:neon": "nodemon --exec \"node scripts/run-with-env.js neon\"",
+    "predev:local": "npm run db:local:ensure",
+    "dev:local": "nodemon --exec \"node scripts/run-with-env.js local\"",
+    "check": "node scripts/static-check.js",
+    "predb:check": "npm run db:local:ensure",
+    "db:check": "node scripts/database-check.js",
+    "predb:seed-admin": "npm run db:local:ensure",
+    "db:seed-admin": "node scripts/seed-local-admin.js",
+    "db:checkout-token": "node scripts/ensure-checkout-token-schema.js",
+    "db:bid-product": "node scripts/ensure-bid-product-schema.js",
+    "contract:check": "node scripts/frontend-contract-check.js",
+    "schema:check": "node scripts/model-schema-check.js",
+    "flow:check": "node scripts/payment-flow-check.js",
+    "fulfillment:check": "node scripts/multi-seller-fulfillment-check.js",
+    "report:check": "node scripts/report-flow-check.js",
+    "check:all": "npm run check && npm run contract:check && npm run schema:check && npm run flow:check && npm run fulfillment:check && npm run report:check"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "heic-convert": "^2.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2",
+    "nodemailer": "^6.9.7",
+    "pg": "^8.23.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.35.2",
+    "sharp": "^0.35.5",
+    "socket.io": "^4.8.4",
+    "stripe": "^18.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

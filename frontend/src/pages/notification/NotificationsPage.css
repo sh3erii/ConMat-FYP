@@ -1,0 +1,201 @@
+.notifications-page {
+  min-height: 100vh;
+  background: var(--conmat-surface);
+  padding: 32px;
+  color: #0f172a;
+  font-family: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.notifications-page__hero {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  border-radius: 30px;
+  padding: 34px;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #0f172a, #1c2333);
+  color: #fff;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2);
+}
+
+.notifications-page__read-all {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 13px;
+  padding: 10px 14px;
+  background: #f97316;
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.notifications-page__read-all:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.notifications-page__read-all:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.notifications-page__hero p {
+ display: inline-flex;
+  width: fit-content;
+
+  padding: 7px 12px;
+  margin-bottom: 14px;
+
+  border: 1px solid rgba(249, 115, 22, .25);
+  border-radius: 999px;
+ background: rgba(249, 115, 22, 0.12);
+  color: #f97316;
+
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+notifications-page__hero h1{
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  border: 1.5px solid rgba(249, 115, 22, 0.25);
+  margin-bottom: 20px;
+}
+
+.notifications-page__hero h1 {
+  margin: 0 0 8px;
+  font-size: clamp(34px, 5vw, 56px);
+  font-weight: 950;
+  letter-spacing: -0.04em;
+}
+
+.notifications-page__hero span {
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 700;
+}
+
+.notifications-page__controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: min(100%, 532px);
+  margin: 0 0 20px auto;
+}
+
+.notifications-page__filters {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
+.notifications-page__filters select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid #dbe2ea;
+  border-radius: 13px;
+  padding: 10px 42px 10px 14px;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%2364748b' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  color: #1c2333;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.05);
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.notifications-page__filters select:hover {
+  border-color: #f97316;
+}
+
+.notifications-page__filters select:focus {
+  border-color: #f97316;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
+}
+
+.notifications-page__list {
+  display: grid;
+  gap: 14px;
+}
+
+.notifications-page__state,
+.notifications-page__error {
+  padding: 24px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  color: #64748b;
+  text-align: center;
+  font-weight: 800;
+}
+
+.notifications-page__error {
+  color: #b91c1c;
+  border-color: rgba(185, 28, 28, 0.18);
+}
+
+.notifications-page__load-more {
+  justify-self: center;
+  min-width: 150px;
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 20px;
+  background: #0f172a;
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.notifications-page__load-more:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.notifications-page__empty {
+  text-align: center;
+  background: #fff;
+  border-radius: 24px;
+  padding: 40px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.notifications-page__empty h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 950;
+}
+
+.notifications-page__empty p {
+  margin: 0;
+  color: #64748b;
+  font-weight: 700;
+}
+.notifications-page__back-btn {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transition: background-color 0.2s ease;
+}
+
+.notifications-page__back-btn:hover {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .notifications-page { padding: 18px; }
+  .notifications-page__hero { align-items: stretch; flex-direction: column; padding: 24px; }
+}
+
+@media (max-width: 420px) {
+  .notifications-page { padding: 12px; }
+  .notifications-page__hero { padding: 20px 16px; border-radius: 22px; }
+  .notifications-page__filters { width: 100%; }
+}

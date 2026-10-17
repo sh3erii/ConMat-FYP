@@ -1,0 +1,180 @@
+.public-footer {
+  width: min(1180px, calc(100% - 32px));
+  margin: 64px auto 0;
+  padding: 46px 0 26px;
+  border-top: 1px solid rgba(15, 23, 42, 0.1);
+  color: #1c2333;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.public-footer__grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.8fr) repeat(2, minmax(150px, 0.75fr));
+  gap: 38px;
+  align-items: start;
+}
+
+.public-footer--landing .public-footer__grid {
+  grid-template-columns: minmax(260px, 1.6fr) repeat(3, minmax(140px, 0.7fr));
+}
+
+.public-footer__brand {
+  max-width: 390px;
+}
+
+.public-footer__wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  text-decoration: none;
+}
+
+.public-footer__wordmark-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.public-footer__wordmark-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.public-footer__wordmark-text {
+  position: relative;
+  top: 1px;
+  color: var(--conmat-orange, #f97316);
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.public-footer__brand p {
+  margin: 14px 0 0;
+  color: #475569;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.75;
+}
+
+.public-footer__column h2 {
+  margin: 2px 0 17px;
+  color: #1c2333;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.public-footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.public-footer__links a {
+  width: fit-content;
+  color: #475569;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.public-footer__links a:hover {
+  transform: translateX(2px);
+}
+
+.public-footer__links a:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid #f97316;
+  outline-offset: 3px;
+}
+
+.public-footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 42px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  color: #475569;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.public-footer__bottom span:last-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  padding: 4px 7px;
+  border-radius: 7px;
+  background: #1c2333;
+  color: #ffffff;
+  font-size: 0.67rem;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 900px) {
+  .public-footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .public-footer__brand {
+    max-width: none;
+    grid-column: 1 / -1;
+  }
+
+  .public-footer--landing .public-footer__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .public-footer {
+    margin-top: 48px;
+    padding-top: 34px;
+  }
+
+  .public-footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 34px 24px;
+  }
+
+  .public-footer--landing .public-footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .public-footer:not(.public-footer--landing) .public-footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* The brand must own its row before the two compact link columns. */
+  .public-footer .public-footer__brand {
+    grid-column: 1 / -1;
+    max-width: 360px;
+  }
+
+  .public-footer--landing .public-footer__column:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .public-footer__brand p {
+    font-size: 0.82rem;
+    line-height: 1.65;
+  }
+
+  .public-footer__bottom {
+    flex-direction: column;
+    margin-top: 34px;
+  }
+}

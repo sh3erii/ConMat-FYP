@@ -1,0 +1,66 @@
+.bids-workspace-nav-shell {
+  background: #f6f7fb;
+  padding: 24px 32px 0;
+}
+
+.bids-workspace-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+}
+
+.bids-workspace-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  color: #475569;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.bids-workspace-nav a:hover,
+.bids-workspace-nav a:focus-visible {
+  background: #fff7ed;
+  color: #c2410c;
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.bids-workspace-nav a.is-active {
+  background: #f97316;
+  color: #ffffff;
+}
+
+@media (max-width: 767px) {
+  .bids-workspace-nav-shell {
+    padding: 18px 16px 0;
+  }
+
+  .bids-workspace-nav {
+    flex-wrap: nowrap;
+  }
+
+  .bids-workspace-nav a {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 8px 4px;
+    font-size: 0.68rem;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .bids-workspace-nav a svg {
+    display: none;
+  }
+}

@@ -1,0 +1,567 @@
+.supplier-bids-page {
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 32px;
+
+  background: #f6f7fb;
+  color: #1c2333;
+
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+.supplier-bids-header {
+  background: linear-gradient(135deg, #1c2333, #273044);
+
+  border-radius: 30px;
+
+  color: #ffffff;
+
+  margin-bottom: 24px;
+
+  padding: 34px;
+}
+
+.supplier-bids-eyebrow {
+  display: inline-flex;
+  width: fit-content;
+
+  padding: 7px 12px;
+  margin-bottom: 14px;
+
+  border: 1px solid rgba(249, 115, 22, .25);
+  border-radius: 999px;
+ background: rgba(249, 115, 22, 0.12);
+  color: #f97316;
+
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.supplier-bids-header h1 {
+  display: block !important;
+
+  width: auto !important;
+
+  margin: 10px 0 14px !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+
+  border: none !important;
+  border-radius: 0 !important;
+
+  color: #ffffff !important;
+
+  font-size: clamp(2rem, 4vw, 3.4rem) !important;
+
+  font-weight: 900 !important;
+
+  line-height: 1.05 !important;
+
+  letter-spacing: -0.045em !important;
+
+  text-transform: none !important;
+}
+
+.supplier-bids-header p {
+  max-width: 720px;
+
+  margin: 0 !important;
+
+  color: #cbd5e1 !important;
+
+  font-size: 0.98rem;
+
+  line-height: 1.7;
+}
+
+.supplier-bids-page .alert-success {
+  margin-bottom: 24px;
+
+  border: 1px solid rgba(5, 150, 105, 0.15);
+
+  border-radius: 16px;
+
+  background: #ecfdf5;
+
+  color: #047857;
+
+  font-weight: 700;
+
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+}
+
+.supplier-bids-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.supplier-bids-status-filter {
+  display: grid;
+  gap: 7px;
+  min-width: min(280px, 100%);
+  margin-left: auto;
+}
+
+.supplier-bids-status-filter span {
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.supplier-bids-status-filter select {
+  min-height: 46px;
+  padding: 10px 42px 10px 14px;
+  border: 1px solid #dbe2ea;
+  border-radius: 13px;
+  background-color: #fff;
+  color: #1c2333;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 0.05);
+}
+
+.supplier-bids-status-filter select:focus {
+  border-color: #cbd5e1;
+  outline: 3px solid rgba(15, 23, 42, 0.1);
+}
+
+.supplier-bids-back {
+  display: inline-flex;
+  width: auto;
+  height: 48px;
+  padding: 0 16px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  background: #fff;
+  color: #0f172a;
+  font: inherit;
+  font-weight: 950;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.supplier-bids-back svg,
+.supplier-bids-back span {
+  display: block;
+  flex: 0 0 auto;
+}
+
+.supplier-bids-back:hover,
+.supplier-bids-back:focus,
+.supplier-bids-back:active {
+  border-color: rgba(15, 23, 42, 0.08) !important;
+  background: #fff !important;
+  color: #0f172a !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.supplier-bids-back:focus-visible {
+  outline: 3px solid rgba(15, 23, 42, 0.1);
+  outline-offset: 2px;
+}
+
+.supplier-bids-content {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.supplier-bids-table-card {
+  border: 1px solid #e5e7eb !important;
+
+  border-radius: 24px !important;
+
+  background: #ffffff !important;
+
+  box-shadow:
+    0 16px 40px rgba(15, 23, 42, 0.07) !important;
+}
+
+.supplier-bids-page table {
+  min-width: 760px;
+
+  margin: 0;
+
+  color: #1c2333;
+}
+
+.supplier-bids-page table thead {
+  background: #f8fafc !important;
+}
+
+.supplier-bids-page table th {
+  padding-top: 17px !important;
+
+  padding-bottom: 17px !important;
+
+  background: #f8fafc !important;
+
+  border: 0 !important;
+
+  color: #64748b !important;
+
+  font-size: 0.7rem !important;
+
+  font-weight: 900 !important;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+.supplier-bids-page table td {
+  padding-top: 20px !important;
+
+  padding-bottom: 20px !important;
+
+  border-color: #eef2f7 !important;
+
+  vertical-align: middle;
+}
+
+.supplier-bids-page table td h3 {
+  margin: 0 0 5px !important;
+
+  color: #111827 !important;
+
+  font-size: 0.95rem !important;
+
+  font-weight: 800 !important;
+}
+
+.supplier-bids-page table td small {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #94a3b8 !important;
+
+  font-size: 0.76rem !important;
+}
+
+.supplier-bids-page table td .bid-request-owner {
+  margin-top: 8px;
+  color: #b45309 !important;
+  font-weight: 800 !important;
+}
+
+.supplier-bids-page table td:nth-child(2) {
+  color: #334155 !important;
+
+  font-size: 0.9rem;
+}
+
+.supplier-bids-page .target-price {
+  color: #059669 !important;
+
+  font-size: 0.9rem;
+}
+
+.supplier-bids-page table .badge {
+  padding: 7px 11px !important;
+
+  border-radius: 999px !important;
+
+  background: #f1f5f9 !important;
+
+  color: #475569 !important;
+
+  font-size: 0.72rem !important;
+
+  font-weight: 800 !important;
+}
+
+.supplier-bids-page table .bid-participant-list {
+  display: inline-block;
+  max-width: 260px;
+  line-height: 1.45;
+  white-space: normal;
+}
+
+.supplier-bids-page .table-hover > tbody > tr {
+  transition: background 0.2s ease;
+}
+
+.supplier-bids-page .table-hover > tbody > tr:hover {
+  --bs-table-hover-bg: rgba(249, 115, 22, 0.035);
+
+  background: rgba(249, 115, 22, 0.035) !important;
+}
+
+.supplier-bids-page .bid-now-btn {
+  min-width: 82px;
+
+  padding: 8px 14px !important;
+
+  border: none !important;
+
+  border-radius: 10px !important;
+
+  background: var(--conmat-primary-action) !important;
+
+  color: #ffffff !important;
+
+  font-size: 0.78rem !important;
+
+  font-weight: 900 !important;
+
+  box-shadow: none !important;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.supplier-bids-page .bid-now-btn:hover {
+  transform: translateY(-2px);
+}
+
+.supplier-bid-form-card {
+  border: 1px solid #e5e7eb !important;
+
+  border-radius: 24px !important;
+
+  background: #ffffff !important;
+
+  box-shadow:
+    0 16px 40px rgba(15, 23, 42, 0.07) !important;
+}
+
+.supplier-bid-form-card h2 {
+  margin-bottom: 20px !important;
+
+  color: #111827 !important;
+
+  font-size: 1.25rem !important;
+
+  font-weight: 900 !important;
+
+  letter-spacing: -0.035em;
+}
+
+.supplier-bid-form-card h2::after {
+  content: "";
+
+  display: block;
+
+  width: 38px;
+
+  height: 3px;
+
+  margin-top: 10px;
+
+  border-radius: 3px;
+
+  background: #f97316;
+}
+
+.supplier-bid-form-request {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: -4px 0 20px;
+  padding: 14px 15px;
+  border: 1px solid #fed7aa;
+  border-radius: 14px;
+  background: #fff7ed;
+}
+
+.supplier-bid-form-request strong {
+  color: #1c2333;
+  font-size: 0.92rem;
+  font-weight: 900;
+}
+
+.supplier-bid-form-request span {
+  color: #9a3412;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.supplier-bid-form-request small {
+  color: #64748b;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.supplier-bid-form-card .form-label {
+  color: #334155 !important;
+
+  font-size: 0.78rem !important;
+
+  font-weight: 800 !important;
+}
+
+.supplier-bid-form-card .form-control {
+  min-height: 44px;
+
+  padding: 10px 13px !important;
+
+  border: 1px solid #e2e8f0 !important;
+
+  border-radius: 11px !important;
+
+  background: #f8fafc !important;
+
+  color: #1e293b !important;
+
+  box-shadow: none !important;
+}
+
+.supplier-bid-form-card .form-control:focus {
+  border-color: rgba(249, 115, 22, 0.55) !important;
+
+  background: #ffffff !important;
+
+  box-shadow:
+    0 0 0 3px rgba(249, 115, 22, 0.1) !important;
+
+  outline: none !important;
+}
+
+.supplier-bid-form-card textarea.form-control {
+  min-height: 90px;
+
+  resize: vertical;
+}
+
+.supplier-bid-product-note,
+.supplier-bid-product-warning {
+  display: block;
+  margin-top: 7px;
+  font-size: .72rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.supplier-bid-product-note {
+  color: #64748b;
+}
+
+.supplier-bid-product-warning {
+  color: #b91c1c;
+}
+
+.supplier-bid-form-card .btn-orange-cta {
+  min-height: 44px;
+
+  border: none !important;
+
+  border-radius: 12px !important;
+
+  background: var(--conmat-primary-action) !important;
+
+  color: #ffffff !important;
+
+  font-weight: 900 !important;
+
+  box-shadow: none !important;
+}
+
+.supplier-bid-form-card .btn-orange-cta:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: none !important;
+}
+
+.supplier-bid-form-card .btn-outline-secondary {
+  min-height: 44px;
+
+  border-radius: 12px !important;
+
+  border: 1px solid #e5e7eb !important;
+
+  background: #ffffff !important;
+
+  color: #64748b !important;
+
+  font-weight: 900 !important;
+}
+
+@media (max-width: 991px) {
+  .supplier-bids-page {
+    padding: 18px;
+  }
+
+  .supplier-bid-form-card.sticky-top {
+    position: static !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .supplier-bids-page {
+    padding: 18px;
+  }
+
+  .supplier-bids-header {
+    padding: 26px 22px;
+
+    border-radius: 24px;
+  }
+
+  .supplier-bids-header h1 {
+    font-size: 2rem !important;
+  }
+
+  .supplier-bids-header p {
+    font-size: 0.9rem;
+  }
+
+  .supplier-bids-toolbar {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .supplier-bids-status-filter {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .supplier-bids-table-card,
+  .supplier-bid-form-card {
+    border-radius: 20px !important;
+  }
+
+  .supplier-bid-form-card {
+    padding: 22px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .supplier-bids-page {
+    padding: 12px;
+  }
+
+  .supplier-bids-header {
+    padding: 24px 18px;
+  }
+
+  .supplier-bids-header h1 {
+    font-size: 1.8rem !important;
+  }
+
+  .supplier-bids-page table {
+    min-width: 700px;
+  }
+
+  .supplier-bid-form-card {
+    padding: 20px !important;
+  }
+}

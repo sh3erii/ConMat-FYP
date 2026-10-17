@@ -1,0 +1,85 @@
+.conmat-hero-actions,
+.conmat-hero-action {
+  box-shadow: none !important;
+}
+
+/* Keep every native or link-based action flat across all roles and pages. */
+:where(
+  button,
+  input[type='button'],
+  input[type='submit'],
+  input[type='reset'],
+  input[type='image'],
+  [role='button'],
+  .btn,
+  a[class*='btn'],
+  a[class*='button'],
+  a[class*='action'],
+  a[class*='cta']
+) {
+  box-shadow: none !important;
+}
+
+.conmat-hero-actions {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.conmat-hero-action {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 11px 16px !important;
+  border-radius: 12px !important;
+  text-decoration: none !important;
+  font-size: .86rem !important;
+  font-weight: 800 !important;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: .2s ease !important;
+}
+
+.conmat-hero-action:hover {
+  transform: translateY(-2px) !important;
+}
+
+.conmat-hero-action:focus-visible {
+  outline: 3px solid rgba(249, 115, 22, .3);
+  outline-offset: 3px;
+}
+
+.conmat-hero-action--primary {
+  background: var(--conmat-primary-action) !important;
+  border-color: transparent !important;
+  color: var(--conmat-primary-action-text) !important;
+}
+
+.conmat-hero-action--secondary {
+  background: var(--conmat-secondary-action) !important;
+  border: 1px solid var(--conmat-secondary-action-border) !important;
+  color: var(--conmat-secondary-action-text) !important;
+}
+
+.conmat-hero-action svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 520px) {
+  .conmat-hero-actions {
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+
+  .conmat-hero-action {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: 8px !important;
+    font-size: .76rem !important;
+    white-space: normal !important;
+    text-align: center;
+  }
+}

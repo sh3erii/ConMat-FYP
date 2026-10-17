@@ -1,0 +1,18 @@
+{
+  "User.js": ["id","name","email","phone","passwordHash","role","status","verificationStatus","companyName","cnic","street","city","postalCode","latitude","longitude","profilePhoto","userPhoto","idCardPhoto","ntnPhoto","businessApprovalLetter","verificationNote","materialFocus","stripeConnectedAccountId","stripeDetailsSubmitted","stripePayoutsEnabled","stripeTransfersStatus","stripePayoutCountry"],
+  "Product.js": ["id","sellerId","name","category","brand","unit","retailPrice","wholesalePrice","minWholesaleQty","deliveryCharge","freeDeliveryMinQuantity","stock","city","description","imageUrl","status","verificationNote","reviewRequestNote","reviewRequestedAt","isFeatured"],
+  "ProductReport.js": ["id","productId","reporterId","reason","details","status","adminNote","reviewedBy","reviewedAt"],
+  "Order.js": ["id","orderNumber","checkoutToken","buyerId","buyerRole","buyerName","city","subtotal","shippingFee","taxAmount","discount","totalAmount","status","orderStatus","paymentStatus","paymentId","paymentMethod","shippingAddress","contactPhone","deliveryWindow","notes","sourceBidOfferId","inventoryReserved","stockRestoredAt","deliveredAt","deliveryResponseDeadline","deliveryResolution","cancelledAt"],
+  "OrderItem.js": ["id","orderId","productId","sellerId","productName","category","unit","quantity","pricingType","unitPrice","lineTotal","fulfillmentStatus","deliveryAddress","deliveryCity","contactPhone","deliveryWindow","deliveryCharge","buyerNote","sellerNote","trackingLocation","deliveredAt","deliveryResponseDeadline","deliveryResolution","productSnapshot"],
+  "OrderStatusEvent.js": ["id","orderId","orderItemId","sellerId","status","description","location","updatedBy","visibleToBuyer"],
+  "Payment.js": ["id","orderId","buyerId","amount","currency","method","status","stripePaymentIntentId","stripeChargeId","transactionId","fundsStatus","paidAt"],
+  "SellerPayout.js": ["id","orderId","paymentId","sellerId","stripeConnectedAccountId","stripeTransferId","payoutMethodId","payoutProvider","payoutDestination","processor","processorReference","releaseReason","currency","grossAmount","commissionRate","commissionAmount","netAmount","status","failureMessage","releaseAttemptedAt","releasedAt"],
+  "SellerPaymentMethod.js": ["id","sellerId","provider","accountTitle","accountIdentifierEncrypted","accountIdentifierLast4","isDefault","active"],
+  "Invoice.js": ["id","invoiceNumber","orderId","buyerId","paymentId","subtotal","deliveryFee","tax","discount","total","status","issuedAt","paidAt"],
+  "Bid.js": ["requestedById","requesterRole","productId","title","category","city","requiredQuantity","unit","targetPrice","deliveryAddress","notes","requestStatus","acceptedOfferId","expiresAt","bidRequestId","supplierId","bidAmount","deliveryDays","status"],
+  "Notification.js": ["id","userId","title","message","type","isRead","readAt","actionUrl","metadata"],
+  "NotificationPreference.js": ["id","userId","orderUpdates","bidUpdates","paymentInvoices","adminAlerts","emailEnabled"],
+  "SecurityLog.js": ["id","userId","action","ip","device","location"],
+  "PendingRegistration.js": ["id","email","registrationData","passwordHash","otpHash","otpExpiresAt","resendAvailableAt","attempts"],
+  "PasswordResetOtp.js": ["id","email","otpHash","otpExpiresAt","resendAvailableAt","attempts"]
+}

@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.neon
+.env.local
+uploads/products/*
+!uploads/products/.gitkeep
+uploads/verification/*
+!uploads/verification/.gitkeep
+*.log
+.DS_Store

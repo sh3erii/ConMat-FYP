@@ -1,0 +1,32 @@
+.not-found-page {
+  min-height: calc(100vh - 72px);
+  padding: 48px 18px;
+  display: grid;
+  place-items: center;
+  background: var(--conmat-surface);
+}
+.not-found-card {
+  width: min(620px, 100%);
+  padding: clamp(28px, 6vw, 52px);
+  border: 1px solid var(--conmat-border);
+  border-radius: var(--conmat-radius-lg);
+  background: #fff;
+  box-shadow: var(--conmat-shadow-md);
+  text-align: center;
+}
+.not-found-card > span {
+  display: inline-flex;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--conmat-orange-soft);
+  color: var(--conmat-orange-dark);
+  font-weight: 900;
+}
+.not-found-card h1 {
+  margin: 18px 0 10px;
+  color: var(--conmat-navy);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+.not-found-card p { color: var(--conmat-slate-500); line-height: 1.7; }
+.not-found-actions { margin-top: 24px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }

@@ -1,0 +1,345 @@
+/* Application-wide intrinsic sizing and mobile overflow protection. */
+html {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 100%;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+body,
+#root {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+:where(main, header, nav, footer, section, article, aside, form, fieldset, div) {
+  min-width: 0;
+}
+
+:where(main, header, nav, footer) {
+  width: 100%;
+  max-width: 100%;
+}
+
+:where(img, video, iframe) {
+  max-width: 100%;
+}
+
+:where(input, select, textarea, button) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+:where(h1, h2, h3, h4, p, a, button, label, span, strong, small, td, th) {
+  overflow-wrap: break-word;
+}
+
+:where(pre, code) {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+:where(.table-responsive, [class*="table-wrap"], [class*="table-card"]) {
+  max-width: 100%;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+:where(.recharts-responsive-container) {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+:where(.recharts-wrapper, .recharts-surface) {
+  min-width: 0 !important;
+}
+
+@media (max-width: 767px) {
+  .login-page__eyebrow,
+  .register-info__eyebrow {
+    width: fit-content !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 0 10px !important;
+    padding: 4px 8px !important;
+    border-width: 1px !important;
+    font-size: 0.5625rem !important;
+    font-weight: 800 !important;
+    line-height: 1.15 !important;
+    letter-spacing: 0.05em !important;
+    white-space: nowrap;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  body,
+  #root,
+  main {
+    touch-action: pan-y pinch-zoom;
+    overscroll-behavior-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  main {
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+
+  :where(
+    .customer-dashboard-page,
+    .retailer-dashboard-page,
+    .wholesaler-dashboard-page,
+    .supplier-dashboard-page,
+    .admin-dashboard-page,
+    .bulk-request-page,
+    .bid-comparison-page,
+    .supplier-bids-page,
+    .manage-products-page,
+    .incoming-orders-page,
+    .cart-page,
+    .checkout-page,
+    .order-history-page,
+    .order-detail-page,
+    .order-tracking-page,
+    .profile-page,
+    .settings-page,
+    .notifications-page,
+    .invoice-viewer,
+    .payment-checkout,
+    .user-management-page,
+    .seller-verification-page,
+    .product-management-page,
+    .order-management-page,
+    .admin-reports-page,
+    .seller-profile-page
+  ) {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    padding-right: 14px !important;
+    padding-left: 14px !important;
+    overflow-y: visible;
+  }
+
+  :where(main, section, article, aside, form, fieldset) > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  :where(
+    [class$="-card"],
+    [class*="-card "],
+    [class$="__card"],
+    [class*="__card "],
+    [class$="-panel"],
+    [class*="-panel "]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  :where(section, header)[class*="hero"] {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  [class*="hero"] h1 {
+    max-width: 100%;
+    font-size: clamp(1.75rem, 9vw, 2.35rem) !important;
+    line-height: 1.12 !important;
+    overflow-wrap: anywhere;
+  }
+
+  :where([class*="hero"], [class*="card"], [class*="panel"]) :where(a, button) {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  :where([class*="modal-card"], [class*="modal-inner"], [class*="modal__content"]) {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  :where([class*="modal"], [class*="dialog"]) :where(input, select, textarea, button) {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .landing-page .row {
+    width: 100%;
+    max-width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .landing-page .row > * {
+    min-width: 0;
+  }
+
+  .manage-products-grid .supplier-product-card__actions button {
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .product-card__body {
+    padding: 18px;
+  }
+
+  .product-card__meta,
+  .product-card__price-row,
+  .product-card__quantity-wrap label,
+  .payment-summary-panel__head,
+  .payment-summary-panel__item,
+  .payment-summary-panel__totals p {
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+
+  .product-card__price-row > *,
+  .payment-summary-panel__head > *,
+  .payment-summary-panel__item > *,
+  .payment-summary-panel__totals p > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .status-filter-tabs,
+  .incoming-orders-filters {
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+
+  .status-filter-tabs::-webkit-scrollbar,
+  .incoming-orders-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .status-filter-tab,
+  .incoming-orders-filters button {
+    flex: 0 0 auto;
+  }
+
+  .supplier-bids-table-card,
+  .customer-dashboard-table-wrap,
+  .wholesaler-dashboard-table-wrap,
+  .invoice-preview-card__table-wrap,
+  .admin-user-table-wrap {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+.conmat-filter-select {
+  font-family: inherit;
+  font-style: normal;
+}
+
+@media (max-width: 767.98px) {
+  .conmat-filter-select {
+    display: block;
+    width: fit-content !important;
+    min-width: 0 !important;
+    max-width: 100%;
+    margin-left: auto;
+    align-self: flex-end;
+    justify-self: end;
+    field-sizing: content;
+    text-align: left;
+    text-align-last: left;
+  }
+
+  .conmat-filter-select option {
+    text-align: left;
+  }
+}
+
+@media (max-width: 420px) {
+  :where(
+    .payment-success,
+    .payment-failed,
+    .global-error-boundary,
+    .protected-route-state,
+    .not-found-page
+  ) {
+    padding: 14px;
+  }
+
+  :where(
+    .payment-success__card,
+    .payment-failed__card,
+    .global-error-card,
+    .protected-route-card,
+    .not-found-card
+  ) {
+    width: 100%;
+    max-width: 100%;
+    padding: 26px 18px;
+    border-radius: 22px;
+  }
+
+  .payment-success__actions,
+  .not-found-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+  }
+
+  .payment-success__actions a,
+  .not-found-actions a {
+    width: 100%;
+    min-width: 0;
+    padding-right: 9px;
+    padding-left: 9px;
+    text-align: center;
+  }
+
+  .payment-success__actions a:only-child,
+  .not-found-actions a:only-child {
+    grid-column: 1 / -1;
+  }
+
+  .product-modal__media {
+    min-height: 210px;
+  }
+
+  .product-modal__content,
+  .payment-method-card,
+  .payment-summary-panel {
+    padding: 18px;
+  }
+
+  .public-footer {
+    width: calc(100% - 24px);
+  }
+
+  .public-footer__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .public-footer__brand,
+  .public-footer__column:last-child {
+    grid-column: auto;
+  }
+
+  .public-footer__bottom {
+    text-align: center;
+  }
+}

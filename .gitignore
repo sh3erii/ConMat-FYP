@@ -1,0 +1,12 @@
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+frontend/dist/
+.local-postgres/
+.env
+frontend/.env
+backend/.env
+backend/.env.neon
+backend/.env.local
+*.log
+.DS_Store

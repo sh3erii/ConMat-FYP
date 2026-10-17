@@ -1,0 +1,1 @@
+const r=require('express').Router(),c=require('../controllers/bidController'),p=require('../middleware/authMiddleware');r.post('/offers/:offerId/convert-to-order',p,c.convertToOrder);r.get('/requests/:requestId/decision-matrix',p,c.decisionMatrix);module.exports=r;
